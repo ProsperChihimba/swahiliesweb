@@ -1,18 +1,18 @@
-﻿"use client";
+"use client";
 
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { FaApple, FaGooglePlay } from "react-icons/fa";
-import { IoIosArrowRoundForward } from "react-icons/io";
+import { APP_STORE_URL, PLAY_STORE_URL } from "../lib/storeLinks";
 
 export default function BuiltFor() {
   const sectionRef = useRef(null);
-  const [activeTab, setActiveTab] = useState("individuals");
 
   useGSAP(() => {
     const ctx = gsap.context(() => {
+      gsap.registerPlugin(ScrollTrigger);
       gsap.from(".builtfor-card", {
         scrollTrigger: {
           trigger: sectionRef.current,
@@ -27,199 +27,162 @@ export default function BuiltFor() {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, { dependencies: [activeTab], scope: sectionRef });
+  }, { scope: sectionRef });
 
   const cardBase =
-    "builtfor-card relative overflow-hidden rounded-[1px] p-6 text-white  max-[900px]:p-5 " +
-    "bg-[linear-gradient(180deg,#9d7ba3_0%,#b58cab_45%,#d4a9a1_100%)]";
+    "builtfor-card relative overflow-hidden rounded-2xl p-6 max-[900px]:p-5";
 
   return (
-    <section ref={sectionRef} className="bg-white text-[#1f1f1f] py-[120px] max-[900px]:py-16">
+    <section
+      ref={sectionRef}
+      className="py-[120px] max-[900px]:py-16"
+      style={{ background: "var(--color-bg)", color: "var(--color-text)" }}
+    >
       <div className="container mx-auto px-6">
         <div className="text-center mb-10">
-          <h2 className="text-[clamp(2.4rem,4vw,4.2rem)] font-semibold text-[#404040] mb-4">
-            Built for
+          <h2
+            className="text-[clamp(2.4rem,4vw,4.2rem)] font-semibold mb-3"
+            style={{ color: "var(--color-primary)" }}
+          >
+            Built for African SMEs
           </h2>
-          <div className="inline-flex items-center gap-2 max-[900px]:flex-wrap max-[900px]:justify-center">
-            <button
-              type="button"
-              onClick={() => setActiveTab("individuals")}
-              className={`inline-flex items-center gap-2 px-6 py-2 rounded-full border text-[1rem] font-semibold transition-all max-[900px]:px-4 max-[900px]:text-[0.95rem] ${
-                activeTab === "individuals"
-                  ? "bg-[#9c7aa0] text-white border-transparent"
-                  : "bg-white text-[#3a59b8] border-[#7e8fe0]"
-              }`}
-            >
-              <span className="w-2 h-2 rounded-full bg-transparent border border-[]/70" />
-              Individuals
-            </button>
-            <button
-              type="button"
-              onClick={() => setActiveTab("businesses")}
-              className={`inline-flex items-center gap-2 px-6 py-2 rounded-full border text-[1rem] font-semibold transition-all max-[900px]:px-4 max-[900px]:text-[0.95rem] ${
-                activeTab === "businesses"
-                  ? "bg-[#9c7aa0] text-white border-transparent"
-                  : "bg-white text-[#3a59b8] border-[#7e8fe0]"
-              }`}
-            >
-              <span className="w-2 h-2 rounded-full bg-transparent border border-[]/70" />
-              Businesses
-            </button>
-          </div>
+          <p
+            className="text-base sm:text-lg max-w-2xl mx-auto"
+            style={{ color: "var(--color-muted)" }}
+          >
+            Swahilies is a single app that replaces the patchwork of bookkeeping
+            apps, mobile money, and bank tools that most African SMEs juggle
+            today.
+          </p>
         </div>
 
-        {activeTab === "individuals" ? (
-          //gsap animation for individual cards
-          <div className="grid grid-cols-2 gap-2 max-w-[1100px] mx-auto max-[900px]:grid-cols-1 max-[900px]:gap-4">
-            <div className="flex flex-col gap-[8px]">
-              <div className={`${cardBase} min-h-[400px]  max-[900px]:min-h-[300px]`}>
-                <div>
-                  <h3 className="text-[1.4rem] font-semibold mb-2">
-                    Global fund transfer
-                  </h3>
-                  <p className="text-[0.95rem] leading-[1.5] text-white/90">
-                    Receive and send funds in fiat and make borderless crypto
-                    transfers to and from over 100 countries.
-                  </p>
-                </div>
-                <div className="absolute right-[26px]  max-[900px]:right-[8px] bottom-[18px] w-[220px] h-[160px] pointer-events-none">
-                  <img
-                    src="/assets/images/circle3.svg"
-                    alt=""
-                    className="absolute w-[130px] h-[130px]  max-[900px]:w-[100px]  max-[900px]:h-[100px] object-contain opacity-95 right-20 bottom-0 z-[3]"
-                  />
-                  <img
-                    src="/assets/images/circle5.svg"
-                    alt=""
-                    className="absolute w-[130px] h-[130px]  max-[900px]:w-[100px]  max-[900px]:h-[100px] object-contain opacity-70 right-9 bottom-0 z-[2]"
-                  />
-                  <img
-                    src="/assets/images/circle6.svg"
-                    alt=""
-                    className="absolute w-[130px] h-[130px]  max-[900px]:w-[100px]  max-[900px]:h-[100px] object-contain opacity-50 right-0 bottom-0 z-[1] blur-[0.6px]"
-                  />
-                </div>
-              </div>
-
-              <div className={`${cardBase} min-h-[200px]`}>
-                <div>
-                  <h3 className="text-[1.4rem] font-semibold mb-2">
-                    Crypto &amp; fiat accounts
-                  </h3>
-                  <p className="text-[0.95rem] leading-[1.5] text-white/90">
-                    Named fiat and crypto accounts available in EUR, USDC, BTC,
-                    ETH, and 10+ other currencies.
-                  </p>
-                </div>
+        <div className="grid grid-cols-2 gap-3 max-w-[1100px] mx-auto max-[900px]:grid-cols-1 max-[900px]:gap-4">
+          <div className="flex flex-col gap-3">
+            <div
+              className={`${cardBase} min-h-[260px]`}
+              style={{
+                background: "var(--color-primary)",
+                color: "#fff",
+              }}
+            >
+              <div
+                className="absolute -top-10 -right-10 w-[180px] h-[180px] rounded-full blur-2xl"
+                style={{ background: "var(--color-accent)", opacity: 0.35 }}
+              />
+              <div className="relative z-10">
+                <h3 className="text-[1.4rem] font-semibold mb-2">
+                  Cross-border supplier payments
+                </h3>
+                <p className="text-[0.95rem] leading-[1.5] text-white/85">
+                  Pay suppliers in USD, CNY, or INR directly from your TZS
+                  balance — fund via bank transfer, mobile money, or
+                  stablecoin. Fair rates, no extra rails.
+                </p>
               </div>
             </div>
 
-            <div className="flex flex-col gap-[8px]">
-              <div className={`${cardBase} min-h-[200px]`}>
-                <div>
-                  <h3 className="text-[1.4rem] font-semibold mb-2">
-                    Quick account setup
-                  </h3>
-                  <p className="text-[0.95rem] leading-[1.5] text-white/90">
-                    Accounts are opened within minutes. Onboarding takes less
-                    than an hour.
-                  </p>
-                </div>
+            <div
+              className={`${cardBase} min-h-[200px]`}
+              style={{
+                background: "var(--wash-lavender)",
+                color: "var(--color-primary)",
+              }}
+            >
+              <h3 className="text-[1.4rem] font-semibold mb-2">
+                Multi-currency settlement
+              </h3>
+              <p
+                className="text-[0.95rem] leading-[1.5]"
+                style={{ color: "var(--color-muted)" }}
+              >
+                Hold TZS, settle in foreign currency. Customer payments come
+                in, supplier bills go out, you stay in control of the FX.
+              </p>
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-3">
+            <div
+              className={`${cardBase} min-h-[200px]`}
+              style={{
+                background: "var(--wash-cream)",
+                color: "var(--color-primary)",
+              }}
+            >
+              <h3 className="text-[1.4rem] font-semibold mb-2">
+                Fast onboarding
+              </h3>
+              <p
+                className="text-[0.95rem] leading-[1.5]"
+                style={{ color: "var(--color-muted)" }}
+              >
+                Open an account on your phone in minutes — no branch visits,
+                no five-day document reviews.
+              </p>
+            </div>
+
+            <div
+              className={`${cardBase} min-h-[260px] flex flex-col gap-4`}
+              style={{
+                background: "var(--wash-peach)",
+                color: "var(--color-primary)",
+              }}
+            >
+              <div>
+                <h3 className="text-[1.4rem] font-semibold mb-2">
+                  In-app loans &amp; credit
+                </h3>
+                <p
+                  className="text-[0.95rem] leading-[1.5]"
+                  style={{ color: "var(--color-muted)" }}
+                >
+                  Request loans directly from the app. Your transaction
+                  history builds the credit profile our lending partners
+                  underwrite against — capital-light, risk-free.
+                </p>
               </div>
 
-              <div className={`${cardBase} min-h-[400px] flex flex-col gap-4`}>
-                <div>
-                  <h3 className="text-[1.4rem] font-semibold mb-2">
-                    Virtual cards
-                  </h3>
-                  <p className="text-[0.95rem] leading-[1.5] text-white/90">
-                    Virtual cards linked to your crypto wallet, enabling
-                    seamless payments with automatic conversion via your phone.
-                  </p>
-                </div>
-
-                <div className="flex flex-wrap gap-2">
-                  <button className="relative border border-white/70 rounded-1 px-2 py-1 pl-6 bg-transparent text-white font-semibold text-[0.7rem] leading-[1.1] flex flex-col items-start">
-                    <span className="absolute left-[4px] top-1/2 -translate-y-1/2 text-[1.15rem] opacity-95">
-                      <FaApple />
-                    </span>
-                    <span className="text-[0.5rem] font-medium opacity-80">
-                      Download on the
-                    </span>
-                    App Store
-                  </button>
-                  <button className="relative border border-white/70 rounded-1 px-2 py-1 pl-6 bg-transparent text-white font-semibold text-[0.7rem] leading-[1.1] flex flex-col items-start">
-                    <span className="absolute left-[4px] top-1/2 -translate-y-1/2 text-[1.15rem] opacity-95">
-                      <FaGooglePlay />
-                    </span>
-                    <span className="text-[0.5rem] font-medium opacity-80">
-                      Get it on
-                    </span>
-                    Google Play
-                  </button>
-                </div>
-
-                <div className="absolute right-0 bottom-0 w-[210px] h-[180px] pointer-events-none max-[900px]:static max-[900px]:w-full max-[900px]:h-[120px] max-[900px]:mt-3">
-                  <span className="absolute w-[140px] h-[100px]  bg-[linear-gradient(140deg,#f7e3c6,#d6b1b7)] shadow-[0_16px_30px_rgba(143,98,113,0.3)] rotate-[-120deg] max-[900px]:rotate-[-120deg] right-9 max-[900px]:-right-5 shadow-sm bottom-9 max-[900px]:bottom-8" />
-                  <span className="absolute w-[170px] h-[100px]  bg-[linear-gradient(140deg,#f7e3c6,#d6b1b7)] shadow-[0_16px_30px_rgba(143,98,113,0.3)] rotate-[-110deg] max-[900px]:rotate-[-100deg] shadow-sm -right-4 max-[900px]:-right-12 bottom-0" />
-                  <span className="absolute w-[140px] h-[100px]  bg-[linear-gradient(140deg,#f7e3c6,#AA7D85)] shadow-[0_16px_30px_rgb(143, 98, 113)] rotate-[-95deg] -right-12 bottom-0  shadow-sm opacity-100" />
-                </div>
-
-                <button className="mt-auto self-start bg-[#f9f2e9] text-[#3a59b8] px-4 py-2 rounded-1 uppercase text-[0.8rem] font-semibold inline-flex items-center gap-2">
-                  Explore cards
-                  <span className="w-[18px] h-[18px] rounded-full bg-[#3a59b8] inline-flex items-center justify-center">
-                    <IoIosArrowRoundForward className="text-[#f9f2e9] rotate-[-40deg]" />
+              <div className="flex flex-wrap gap-2 mt-auto">
+                <a
+                  href={APP_STORE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative border rounded-md px-3 py-2 pl-7 font-semibold text-[0.75rem] leading-[1.1] flex flex-col items-start hover:opacity-90 transition-opacity"
+                  style={{
+                    borderColor: "rgba(14,14,16,0.20)",
+                    color: "var(--color-primary)",
+                  }}
+                >
+                  <span className="absolute left-[6px] top-1/2 -translate-y-1/2 text-[1.25rem] opacity-95">
+                    <FaApple />
                   </span>
-                </button>
+                  <span className="text-[0.55rem] font-medium opacity-80">
+                    Download on the
+                  </span>
+                  App Store
+                </a>
+                <a
+                  href={PLAY_STORE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative border rounded-md px-3 py-2 pl-7 font-semibold text-[0.75rem] leading-[1.1] flex flex-col items-start hover:opacity-90 transition-opacity"
+                  style={{
+                    borderColor: "rgba(14,14,16,0.20)",
+                    color: "var(--color-primary)",
+                  }}
+                >
+                  <span className="absolute left-[6px] top-1/2 -translate-y-1/2 text-[1.25rem] opacity-95">
+                    <FaGooglePlay />
+                  </span>
+                  <span className="text-[0.55rem] font-medium opacity-80">
+                    Get it on
+                  </span>
+                  Google Play
+                </a>
               </div>
             </div>
           </div>
-        ) : (
-          <div className="grid grid-cols-2 gap-6 max-w-[980px] mx-auto max-[900px]:grid-cols-1 max-[900px]:gap-4">
-            <div className="flex flex-col gap-[8px]">
-              <div className={`${cardBase} min-h-[320px]`}>
-                <div>
-                  <h3 className="text-[1.4rem] font-semibold mb-2">
-                    Quick document review
-                  </h3>
-                  <p className="text-[0.95rem] leading-[1.5] text-white/90">
-                    Accounts are opened within one business week. The onboarding
-                    process takes less than 5 business days.
-                  </p>
-                </div>
-              </div>
-              <div className={`${cardBase} min-h-[140px]`}>
-                <div>
-                  <h3 className="text-[1.4rem] font-semibold mb-2">
-                    Fiat &amp; crypto accounts
-                  </h3>
-                  <p className="text-[0.95rem] leading-[1.5] text-white/90">
-                    Access EUR, USDC, BTC, ETH, and other currencies with ease.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-col gap-[8px]">
-              <div className={`${cardBase} min-h-[320px] flex flex-col gap-4`}>
-                <div>
-                  <h3 className="text-[1.4rem] font-semibold mb-2">
-                    Third party transfers to and from individuals and businesses
-                  </h3>
-                  <p className="text-[0.95rem] leading-[1.5] text-white/90">
-                    Receive payments from and send funds to more than 100
-                    countries.
-                  </p>
-                </div>
-                <button className="mt-auto self-start bg-[#f9f2e9] text-[#3a59b8] px-4 py-2 rounded-1 uppercase text-[0.8rem] font-semibold inline-flex items-center gap-2">
-                  Explore business
-                  <span className="w-[18px] h-[18px] rounded-full bg-[#3a59b8] inline-flex items-center justify-center">
-                    <span className="w-[6px] h-[6px] border-r-2 border-b-2 border-white rotate-[-45deg] block" />
-                  </span>
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
+        </div>
       </div>
     </section>
   );
