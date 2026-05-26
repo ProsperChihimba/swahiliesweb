@@ -2,46 +2,87 @@
 @import "tailwindcss";
 
 :root {
-  color-scheme: dark;
-  --bg: #000000;
-  --bg-soft: #0a0a0a;
-  --surface: rgba(255, 255, 255, 0.05);
-  --surface-strong: rgba(255, 255, 255, 0.08);
-  --border: oklch(0.922 0 0);
-  --border-strong: rgba(255, 255, 255, 0.25);
-  --text: #ffffff;
-  --text-muted: rgba(255, 255, 255, 0.7);
-  --text-subtle: rgba(255, 255, 255, 0.45);
-  --accent: #afd3a1;
-  --accent-contrast: #000000;
-  --accent-rgb: 175, 211, 161;
-  --accent-faint: rgba(175, 211, 161, 0.1);
-  --nav-bg: rgba(0, 0, 0, 0.3);
-  --nav-border: rgba(255, 255, 255, 0.12);
-  --overlay: rgba(0, 0, 0, 0.35);
-  --gradient-end: #ffffff;
-  --card-shadow: rgba(175, 211, 161, 0.3);
-  --hero-orb: rgba(175, 211, 161, 0.25);
-  --hero-orb-secondary: rgba(255, 255, 255, 0.18);
-  --msg-two: #ffffff;
-  --noise-opacity: 0.05;
-  --radius: 0.625rem;
-  --background: var(--bg);
-  --foreground: var(--text);
-  --card: var(--surface);
-  --card-foreground: var(--text);
-  --popover: var(--surface);
-  --popover-foreground: var(--text);
+  color-scheme: light;
+
+  /* === Swahilies brand tokens (canonical) === */
+  --color-primary:       #0E0E10;
+  --color-accent:        #F0A020;
+  --color-secondary:     #7C5CE0;
+  --color-tertiary:      #F4A28C;
+
+  --color-bg:            #FFFFFF;
+  --color-surface:       #FAF7F2;
+  --color-surface-alt:   #F2EEFF;
+  --color-text:          #0E0E10;
+  --color-muted:         #5C5C66;
+  --color-subtle:        rgba(14, 14, 16, 0.55);
+  --color-border:        rgba(14, 14, 16, 0.10);
+  --color-border-strong: rgba(14, 14, 16, 0.20);
+
+  --wash-lavender:       #E6E0F5;
+  --wash-peach:          #FAE0D4;
+  --wash-cream:          #FAF1D0;
+
+  --color-success:       #2FA86A;
+  --color-warning:       #E0A82E;
+  --color-danger:        #D64550;
+
+  /* === Legacy aliases (consumed by existing components) === */
+  --bg:                  var(--color-bg);
+  --bg-soft:             var(--color-surface);
+  --surface:             rgba(14, 14, 16, 0.04);
+  --surface-strong:      rgba(14, 14, 16, 0.06);
+  --border:              var(--color-border);
+  --border-strong:       var(--color-border-strong);
+  --text:                var(--color-text);
+  --text-muted:          var(--color-muted);
+  --text-subtle:         var(--color-subtle);
+  --accent:              var(--color-accent);
+  --accent-contrast:     var(--color-primary);
+  --accent-rgb:          240, 160, 32;
+  --accent-faint:        rgba(240, 160, 32, 0.18);
+  --nav-bg:              rgba(255, 255, 255, 0.75);
+  --nav-border:          rgba(14, 14, 16, 0.08);
+  --overlay:             rgba(14, 14, 16, 0.2);
+  --gradient-end:        var(--color-primary);
+  --card-shadow:         rgba(14, 14, 16, 0.12);
+  --hero-orb:            rgba(240, 160, 32, 0.25);
+  --hero-orb-secondary:  rgba(124, 92, 224, 0.18);
+  --msg-two:             var(--color-text);
+  --noise-opacity:       0.03;
+  --radius:              0.625rem;
+  --background:          var(--color-bg);
+  --foreground:          var(--color-text);
+  --card:                var(--color-surface);
+  --card-foreground:     var(--color-text);
+  --popover:             var(--color-surface);
+  --popover-foreground:  var(--color-text);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-background: var(--color-bg);
+  --color-foreground: var(--color-text);
   --font-sans: "Inter", "Montserrat", sans-serif;
   --font-mono: var(--font-geist-mono);
-  --color-keytom-blue: #2f6bff;
-  --color-keytom-purple: #7a5cff;
-  --color-keytom-peach: #f7a989;
+
+  /* Brand tokens exposed to Tailwind */
+  --color-primary:       var(--color-primary);
+  --color-accent:        var(--color-accent);
+  --color-secondary:     var(--color-secondary);
+  --color-tertiary:      var(--color-tertiary);
+  --color-surface:       var(--color-surface);
+  --color-surface-alt:   var(--color-surface-alt);
+  --color-muted:         var(--color-muted);
+  --color-border:        var(--color-border);
+
+  --color-wash-lavender: var(--wash-lavender);
+  --color-wash-peach:    var(--wash-peach);
+  --color-wash-cream:    var(--wash-cream);
+
+  --color-success:       var(--color-success);
+  --color-warning:       var(--color-warning);
+  --color-danger:        var(--color-danger);
+
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -49,31 +90,6 @@
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
-}
-
-[data-theme="light"] {
-  color-scheme: light;
-  --bg: #ffffff;
-  --bg-soft: #ffffff;
-  --surface: rgba(0, 0, 0, 0.04);
-  --surface-strong: rgba(0, 0, 0, 0.06);
-  --border: rgba(0, 0, 0, 0.12);
-  --border-strong: rgba(0, 0, 0, 0.2);
-  --text: #000000;
-  --text-muted: rgba(0, 0, 0, 0.6);
-  --text-subtle: rgba(0, 0, 0, 0.45);
-  --accent: #afd3a1;
-  --accent-contrast: #000000;
-  --accent-faint: rgba(175, 211, 161, 0.25);
-  --nav-bg: rgba(255, 255, 255, 0.75);
-  --nav-border: rgba(0, 0, 0, 0.08);
-  --overlay: rgba(0, 0, 0, 0.2);
-  --gradient-end: #000000;
-  --card-shadow: rgba(0, 0, 0, 0.12);
-  --hero-orb: rgba(175, 211, 161, 0.25);
-  --hero-orb-secondary: rgba(0, 0, 0, 0.08);
-  --msg-two: #000000;
-  --noise-opacity: 0.03;
 }
 
 * {
@@ -221,9 +237,9 @@ h1, h2, h3, h4, h5, h6, p, span, a, button {
 
 .mesh-gradient {
   background:
-    radial-gradient(circle at 15% 20%, rgba(47, 107, 255, 0.18), transparent 55%),
-    radial-gradient(circle at 85% 15%, rgba(122, 92, 255, 0.16), transparent 50%),
-    linear-gradient(135deg, #f9d1d1 0%, #f7f9ff 45%, #c9c9c9 100%);
+    radial-gradient(circle at 15% 20%, var(--wash-lavender), transparent 55%),
+    radial-gradient(circle at 85% 15%, var(--wash-peach), transparent 50%),
+    linear-gradient(135deg, #fefcf8 0%, #fbf6ef 45%, #f4ecdf 100%);
 }
 
 .hero-intro-wrap {
@@ -238,9 +254,9 @@ h1, h2, h3, h4, h5, h6, p, span, a, button {
 
 .mesh-gradient-blue {
   background:
-    radial-gradient(circle at 15% 20%, rgba(122, 92, 255, 0.35), transparent 55%),
-    radial-gradient(circle at 85% 15%, rgba(47, 107, 255, 0.35), transparent 50%),
-    linear-gradient(135deg, #0b1020 0%, #0b132b 45%, #0a0f1f 100%);
+    radial-gradient(circle at 15% 20%, rgba(124, 92, 224, 0.20), transparent 55%),
+    radial-gradient(circle at 85% 15%, rgba(240, 160, 32, 0.18), transparent 50%),
+    linear-gradient(135deg, #0E0E10 0%, #161420 45%, #0E0E10 100%);
 }
 
 .why-keytom-section {
@@ -342,7 +358,7 @@ h1, h2, h3, h4, h5, h6, p, span, a, button {
 }
 
 .text-gradient {
-  background: linear-gradient(135deg, var(--color-keytom-blue), var(--color-keytom-purple), var(--color-keytom-peach));
+  background: linear-gradient(135deg, var(--color-accent), var(--color-secondary), var(--color-tertiary));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -429,7 +445,7 @@ h1, h2, h3, h4, h5, h6, p, span, a, button {
   font-weight: 600;
   line-height: 1.1;
   font-size: clamp(2rem, 4vw + 1rem, 3rem);
-  background: linear-gradient(110deg, rgba(47, 107, 255, 0.8), rgba(247, 169, 137, 0.85) 45%, rgba(122, 92, 255, 0.75) 85%);
+  background: linear-gradient(110deg, var(--color-accent), var(--color-tertiary) 45%, var(--color-secondary) 85%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -441,7 +457,7 @@ h1, h2, h3, h4, h5, h6, p, span, a, button {
   }
 }
 .intro-headline2 {
-  background: linear-gradient(110deg, rgba(47, 107, 255, 0.8), rgba(247, 169, 137, 0.85) 45%, rgba(122, 92, 255, 0.75) 85%);
+  background: linear-gradient(110deg, var(--color-accent), var(--color-tertiary) 45%, var(--color-secondary) 85%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
