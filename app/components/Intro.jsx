@@ -5,17 +5,15 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import {
-  FaCcVisa,
-  FaBitcoin,
-  FaEuroSign,
-  FaPaperPlane,
-  FaInbox,
-  FaCreditCard,
-  FaPiggyBank,
-  FaPlusCircle,
-  FaExchangeAlt,
+  FaMoneyBillWave,
+  FaUsers,
+  FaFileInvoice,
+  FaHandHoldingUsd,
+  FaBook,
+  FaListAlt,
+  FaArrowsAltH,
+  FaMobileAlt,
 } from "react-icons/fa";
-import { TbChartInfographic } from "react-icons/tb";
 import phone from "../../public/assets/images/phone2.png";
 import card from "../../public/assets/images/swahi1.png";
 import Image from "next/image";
@@ -333,28 +331,28 @@ export default function Intro() {
           <div className="w-62.5 h-[70vh] mt-24 flex items-center justify-center relative">
             <div ref={circularRef} className="circular border-3 p-5 flex flex-col gap-4 text-[clamp(1.4rem,3.2vw,2.6rem)] font-semibold">
               <div className="flex items-center gap-3 pb-2">
-                <FaPaperPlane className="circle-text-icon text-[1.3em] lg:text-[0.7em] p-1.5 lg:p-1 md:p-3" />
-                <span className="text-xl">Send</span>
+                <FaMoneyBillWave className="circle-text-icon text-[1.3em] lg:text-[0.7em] p-1.5 lg:p-1 md:p-3" />
+                <span className="text-xl">Malipo</span>
               </div>
               <div className="flex items-center gap-3 pb-2">
-                <FaInbox className="circle-text-icon text-[1.3em] lg:text-[0.7em] p-1.5 lg:p-1 md:p-3" />
-                <span className="text-xl">Receive</span>
+                <FaListAlt className="circle-text-icon text-[1.3em] lg:text-[0.7em] p-1.5 lg:p-1 md:p-3" />
+                <span className="text-xl">Madeni</span>
               </div>
               <div className="flex items-center gap-3 pb-2">
-                <FaCreditCard className="circle-text-icon text-[1.3em] lg:text-[0.7em] p-1.5 lg:p-1 md:p-3" />
-                <span className="text-xl">Pay</span>
+                <FaBook className="circle-text-icon text-[1.3em] lg:text-[0.7em] p-1.5 lg:p-1 md:p-3" />
+                <span className="text-xl">Notebook</span>
               </div>
               <div className="flex items-center gap-3 pb-2">
-                <FaPiggyBank className="circle-text-icon text-[1.3em] lg:text-[0.7em] p-1.5 lg:p-1 md:p-3" />
-                <span className="text-xl">Deposit</span>
+                <FaUsers className="circle-text-icon text-[1.3em] lg:text-[0.7em] p-1.5 lg:p-1 md:p-3" />
+                <span className="text-xl">Wateja</span>
               </div>
               <div className="flex items-center gap-3 pb-2">
-                <FaPlusCircle className="circle-text-icon text-[1.3em] lg:text-[0.7em] p-1.5 lg:p-1 md:p-3" />
-                <span className="text-xl">Top-up</span>
+                <FaHandHoldingUsd className="circle-text-icon text-[1.3em] lg:text-[0.7em] p-1.5 lg:p-1 md:p-3" />
+                <span className="text-xl">Mkopo</span>
               </div>
               <div className="flex items-center gap-3">
-                <FaExchangeAlt className="circle-text-icon text-[1.3em] lg:text-[0.7em] p-1.5 lg:p-1 md:p-3" />
-                <span className="text-xl">Convert</span>
+                <FaFileInvoice className="circle-text-icon text-[1.3em] lg:text-[0.7em] p-1.5 lg:p-1 md:p-3" />
+                <span className="text-xl">Invoice</span>
               </div>
             </div>
             <div ref={illustrationRef} className="absolute inset-0 flex items-center justify-center illustration opacity-0">
@@ -418,8 +416,8 @@ export default function Intro() {
           ref={headlineRef}
           className="intro-headline text-center lg:max-w-2xl max-[900px]:text-6 z-20 relative"
         >
-          A next-generation digital financial institution built for people and
-          businesses who move fast and think global.
+          Pay anywhere. Get paid anywhere. Hold TZS, send USD, CNY or INR — your
+          customers, suppliers, and lenders all in one app.
         </p>
 
         {/* Cards */}
@@ -435,28 +433,28 @@ export default function Intro() {
 
           const cardData = [
             {
-              type: "virtual-cards",
-              bg: "linear-gradient(135deg, #3b5998 0%, #2d4373 100%)",
+              type: "tsh-balance",
+              bg: "linear-gradient(135deg, var(--color-primary) 0%, #1a1a24 100%)",
             },
             {
-              type: "euro-account",
-              bg: "linear-gradient(135deg, #4a6fa5 0%, #345a8c 100%)",
+              type: "tanzania-account",
+              bg: "linear-gradient(135deg, #2a2546 0%, #1a1530 100%)",
             },
             {
-              type: "deposits",
-              bg: "linear-gradient(135deg, #f4d5a6 0%, #e6c28b 100%)",
+              type: "mobile-money",
+              bg: "linear-gradient(135deg, var(--wash-cream) 0%, #f0e0a8 100%)",
             },
             {
-              type: "euro-balance",
-              bg: "linear-gradient(135deg, #5273a8 0%, #3d5a8f 100%)",
+              type: "supplier-payment",
+              bg: "linear-gradient(135deg, var(--wash-lavender) 0%, #d8cef0 100%)",
             },
             {
-              type: "crypto",
-              bg: "linear-gradient(135deg, #c99ca6 0%, #b08593 100%)",
+              type: "madeni",
+              bg: "linear-gradient(135deg, var(--wash-peach) 0%, #f4c5a8 100%)",
             },
             {
-              type: "transactions",
-              bg: "linear-gradient(135deg, #e8c98f 0%, #d4b47a 100%)",
+              type: "wateja",
+              bg: "linear-gradient(135deg, #3a2f1a 0%, #2a2010 100%)",
             },
           ];
 
@@ -474,113 +472,83 @@ export default function Intro() {
               }}
             >
               {/* Card Content */}
-              {cardData[i].type === "virtual-cards" && (
-                <div className="relative w-full h-full p-6 flex flex-col justify-between text-white">
-                  {/* Decorative card images */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-60">
-                    <div className="relative w-32 h-44"></div>
-                  </div>
-                  <div className="relative z-10">
-                    <div className="text-sm font-medium opacity-90"></div>
-                  </div>
-                  <div className="relative z-10">
-                    <h3 className="text- font-semibold">Virtual cards</h3>
-                  </div>
-                </div>
-              )}
-
-              {cardData[i].type === "euro-account" && (
-                <div className="relative w-full h-full p-5 flex flex-col justify-between text-white">
-                  <div>
-                    <h3 className="text-base font-medium mb-8">Euro Account</h3>
-                    <div className="space-y-1.5">
-                      <p className="text-xs opacity-80">
-                        GB44 1234 1234 1234 5678 90
-                      </p>
-                      <p className="text-xs opacity-80">Balance: €7,367</p>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {cardData[i].type === "deposits" && (
-                <div className="relative w-full h-full p-6 flex flex-col justify-end text-[#4a6fa5]">
-                  <div className="mb-4">
-                    <div className="text-3xl font-bold mb-1">€2,890</div>
-                  </div>
-                  <div>
-                    <h3 className="text-base text-sm font-semibold mb-0.5">
-                      Deposits
-                    </h3>
-                    <p className="text-sm opacity-80">and withdrawals</p>
-                  </div>
-                </div>
-              )}
-
-              {cardData[i].type === "euro-balance" && (
+              {cardData[i].type === "tsh-balance" && (
                 <div className="relative w-full h-full p-5 flex flex-col justify-between text-white">
                   <div className="flex items-center gap-2">
-                    <div className="w-9 h-9 rounded-full bg-[#4169b8] flex items-center justify-center">
-                      <FaEuroSign className="text-xl" />
+                    <div className="w-9 h-9 rounded-full flex items-center justify-center" style={{ background: 'var(--color-accent)' }}>
+                      <span className="text-sm font-bold" style={{ color: 'var(--color-primary)' }}>T</span>
                     </div>
-                    <span className="text-2xl font-semibold flex items-center gap-1">
-                      EUR
-                      <svg
-                        className="w-4 h-4"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </span>
+                    <span className="text-2xl font-semibold">TZS</span>
                   </div>
                   <div>
-                    <div className="text-5xl font-bold mb-1">€4</div>
+                    <div className="text-3xl font-bold mb-1">TSh 2,450,000</div>
                     <p className="text-sm opacity-80">Balance</p>
                   </div>
                 </div>
               )}
 
-              {cardData[i].type === "crypto" && (
+              {cardData[i].type === "tanzania-account" && (
                 <div className="relative w-full h-full p-5 flex flex-col justify-between text-white">
-                  <div className="flex items-center gap-2">
-                    <div className="w-9 h-9 rounded-full bg-[#b08593] flex items-center justify-center">
-                      <FaEuroSign className="text-xl" />
-                    </div>
-                    <span className="text-2xl font-semibold">EUR</span>
-                  </div>
                   <div>
-                    <div className="text-5xl font-bold mb-3">€4</div>
-                    <div className="flex items-center gap-2 mb-4">
-                      <div className="w-8 h-8 rounded-md bg-white/90 flex items-center justify-center text-[#c99ca6] font-bold text-sm">
-                        1L
-                      </div>
+                    <h3 className="text-base font-medium mb-8">Tanzania account</h3>
+                    <div className="space-y-1.5">
+                      <p className="text-xs opacity-80">
+                        Receive in TZS, pay anywhere
+                      </p>
+                      <p className="text-xs opacity-80">Balance: TSh 2,450,000</p>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-9 h-9 rounded-full bg-[#f7931a] flex items-center justify-center">
-                        <FaBitcoin className="text-xl text-white" />
-                      </div>
-                      <span className="text-xl font-semibold">BTC</span>
-                    </div>
-                    <div className="text-2xl font-bold mt-2">0.000011</div>
                   </div>
                 </div>
               )}
 
-              {cardData[i].type === "transactions" && (
-                <div className="relative w-full h-full p-6 flex flex-col justify-between text-[#4a6fa5]">
+              {cardData[i].type === "mobile-money" && (
+                <div className="relative w-full h-full p-6 flex flex-col justify-between" style={{ color: 'var(--color-primary)' }}>
+                  <div className="flex items-center gap-2">
+                    <FaMobileAlt className="text-xl" />
+                    <span className="text-sm font-semibold">Mobile money</span>
+                  </div>
+                  <div>
+                    <div className="text-2xl font-bold mb-1">M-Pesa</div>
+                    <p className="text-sm opacity-80">Airtel Money · Tigo Pesa</p>
+                  </div>
+                </div>
+              )}
+
+              {cardData[i].type === "supplier-payment" && (
+                <div className="relative w-full h-full p-5 flex flex-col justify-between" style={{ color: 'var(--color-primary)' }}>
+                  <div className="flex items-center gap-2">
+                    <FaArrowsAltH className="text-xl" />
+                    <span className="text-sm font-semibold">Cross-border</span>
+                  </div>
+                  <div>
+                    <div className="text-2xl font-bold mb-1">$ 12,580</div>
+                    <p className="text-xs opacity-80">Supplier paid in USD / CNY / INR</p>
+                  </div>
+                </div>
+              )}
+
+              {cardData[i].type === "madeni" && (
+                <div className="relative w-full h-full p-6 flex flex-col justify-end" style={{ color: 'var(--color-primary)' }}>
+                  <div className="mb-4">
+                    <div className="text-3xl font-bold mb-1">TSh 425,000</div>
+                  </div>
+                  <div>
+                    <h3 className="text-base font-semibold mb-0.5">Madeni</h3>
+                    <p className="text-sm opacity-80">Outstanding debts</p>
+                  </div>
+                </div>
+              )}
+
+              {cardData[i].type === "wateja" && (
+                <div className="relative w-full h-full p-6 flex flex-col justify-between text-white">
                   <div className="flex items-center gap-2 mb-4">
-                    <div className="w-9 h-9 rounded-full bg-[#5a7fa8] flex items-center justify-center">
-                      <TbChartInfographic className="text-xl text-white" />
+                    <div className="w-9 h-9 rounded-full flex items-center justify-center" style={{ background: 'var(--color-accent)' }}>
+                      <FaUsers className="text-base" style={{ color: 'var(--color-primary)' }} />
                     </div>
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold mb-1">Transactions</h3>
-                    <p className="text-sm opacity-80">Track all activity</p>
+                    <h3 className="text-lg font-semibold mb-1">247 Wateja</h3>
+                    <p className="text-sm opacity-80">Active customers tracked</p>
                   </div>
                 </div>
               )}
