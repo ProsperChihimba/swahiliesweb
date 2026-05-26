@@ -7,7 +7,7 @@ import { useGSAP } from "@gsap/react";
 import Hero from "../components/Hero";
 import Services from "../components/Services";
 import VirtualCard from "../components/VirtualCard";
-import WhyKeytom from "../components/WhyKeytom";
+import Traction from "../components/Traction";
 import BuiltFor from "../components/BuiltFor";
 import Comparison from "../components/Comparison";
 import Intro from "../components/Intro";
@@ -62,7 +62,7 @@ export function HomeContent() {
         </div>
       </div>
       <Services />
-      <WhyKeytom />
+      <Traction />
       <VirtualCard />
       <BuiltFor />
       <Comparison />
