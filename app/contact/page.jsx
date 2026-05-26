@@ -5,6 +5,11 @@ import { FaXTwitter, FaInstagram } from "react-icons/fa6";
 import star from "../../public/assets/images/star2.svg";
 import { GiTireIronCross } from "react-icons/gi";
 
+export const metadata = {
+  title: "Contact",
+  description:
+    "Get in touch with the Swahilies team — contact@swahilies.com or +255 682 411 725.",
+};
 
 function Contact() {
   return (

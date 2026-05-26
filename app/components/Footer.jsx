@@ -41,50 +41,27 @@ export default function Footer() {
       <div className=" mx-auto lg:px-16 px-6">
         {/* here should go the footer 1 */}
         <div className="pt-6">
-          <div className="grid grid-cols-4 gap-16 max-[900px]:gap-7 text-white max-[900px]:grid-cols-1 max-[600px]:grid-cols-1">
+          <div className="grid grid-cols-2 gap-16 max-[900px]:gap-7 text-white max-[900px]:grid-cols-1 max-w-2xl">
             <div className="space-y-4 max-[900px]:space-y-0">
               <div className="flex items-center gap-2 text-[#f6e2a3] font-semibold uppercase text-[0.95rem] tracking-wide">
                 <span className="w-2 h-2 rounded-full bg-[#f6e2a3]" />
                 Discover
               </div>
-              <ul className="space-y-3 max-[900px]:text-[0.8rem] max-[900px]:text-[0.8rem] text-[1rem] max-[900px]:space-y-1">
-                <li>Personal</li>
-                <li>Business</li>
-                <li>Cards</li>
-                <li>FAQ</li>
+              <ul className="space-y-3 max-[900px]:text-[0.8rem] text-[1rem] max-[900px]:space-y-1">
+                <li><a href="/business" className="hover:underline">Business</a></li>
+                <li><a href="/cards" className="hover:underline">How it works</a></li>
+                <li><a href="/contact" className="hover:underline">Contact</a></li>
               </ul>
             </div>
 
             <div className="space-y-4 max-[900px]:space-y-0">
               <div className="flex items-center gap-2 text-[#f6e2a3] font-semibold uppercase text-[0.95rem] tracking-wide">
                 <span className="w-2 h-2 rounded-full bg-[#f6e2a3]" />
-                Legal
+                Get in touch
               </div>
               <ul className="space-y-3 max-[900px]:text-[0.8rem] text-[1rem] max-[900px]:space-y-1">
-                <li>Terms and Conditions</li>
-                <li>AML Policy</li>
-                <li>Privacy Policy</li>
-             
-              </ul>
-            </div>
-
-            <div className="space-y-4 max-[900px]:space-y-0">
-              <div className="flex items-center gap-2 text-[#f6e2a3] font-semibold uppercase text-[0.95rem] tracking-wide">
-                <span className="w-2 h-2 rounded-full bg-[#f6e2a3]" />
-                Company
-              </div>
-              <ul className="space-y-3 max-[900px]:text-[0.8rem] text-[1rem] max-[900px]:space-y-1">
-                <li>Blog</li>
-              </ul>
-            </div>
-
-            <div className="space-y-4 max-[900px]:space-y-0">
-              <div className="flex items-center gap-2 text-[#f6e2a3] font-semibold uppercase text-[0.95rem] tracking-wide">
-                <span className="w-2 h-2 rounded-full bg-[#f6e2a3]" />
-                Contact
-              </div>
-              <ul className="space-y-3 max-[900px]:text-[0.8rem] text-[1rem] max-[900px]:space-y-1">
-                <li>Email</li>
+                <li><a href="mailto:contact@swahilies.com" className="hover:underline">contact@swahilies.com</a></li>
+                <li><a href="tel:+255682411725" className="hover:underline">+255 682 411 725</a></li>
               </ul>
             </div>
           </div>
@@ -153,7 +130,7 @@ export default function Footer() {
 
           <div className="flex items-center gap-3">
             <span className="font-semibold text-[0.95rem]">
-              © Keytom Ltd 2026
+              © Swahilies Inc. 2026
             </span>
           </div>
         </div>
@@ -164,39 +141,6 @@ export default function Footer() {
             and remain subject to applicable laws, regulatory requirements, and
             internal compliance policies.
           </p>
-          {/* <p>
-            Cryptocurrency and digital asset services are provided by KEYTOM
-            SERVICES LTD (hereinafter "KEYTOM"), registered in Canada as a Money
-            Services Business with the Financial Transactions and Reports
-            Analysis Centre of Canada (FINTRAC) under MSB registration number
-            M21788474 and operating in accordance with the Proceeds of Crime
-            (Money Laundering) and Terrorist Financing Act (PCMLTFA).
-          </p> */}
-          {/* <p>
-            Cryptocurrencies and digital assets are highly volatile financial
-            instruments and involve a significant risk of partial or total loss
-            of funds. KEYTOM does not provide investment, financial, tax, or
-            legal advice. Clients remain solely responsible for conducting their
-            own due diligence and complying with applicable laws in their
-            jurisdiction.
-          </p> */}
-          {/* <p>
-            Services may not be available in all jurisdictions and may be
-            restricted based on regulatory, compliance, or sanctions
-            requirements. KEYTOM reserves the right to request verification
-            information or restrict services where required by law.
-          </p> */}
-          {/* <p>
-            KEYTOM operates exclusively through keytom.com and authorized
-            communication channels. KEYTOM is not responsible for activities
-            conducted through unauthorized or impersonating websites or third
-            parties.
-          </p> */}
-          {/* <p>
-            By using KEYTOM services, clients acknowledge and accept the risks
-            associated with digital asset transactions and agree to comply with
-            KEYTOM's Terms and Conditions and applicable legal requirements.
-          </p> */}
         </div>
       </div>
     </footer>

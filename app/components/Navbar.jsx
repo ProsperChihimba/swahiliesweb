@@ -84,7 +84,7 @@ export default function NavBar() {
     };
   }, { scope: headerRef });
 
-  const navItems = ["CONTACT", "BUSINESS", "CARDS", "FAQ"];
+  const navItems = ["BUSINESS", "CARDS", "CONTACT"];
 
   return (
     <header
@@ -101,7 +101,7 @@ export default function NavBar() {
   bg-white/5 backdrop-blur-md
  `}
         >
-          <Image src={logo} alt="Keytom logo" priority className="h-5 w-auto" />
+          <Image src={logo} alt="Swahilies" priority className="h-5 w-auto" />
         </div>
 
         {/* Desktop Navigation */}
@@ -179,7 +179,7 @@ export default function NavBar() {
               <div className="flex items-center">
                 <Image
                   src={logo}
-                  alt="Keytom logo"
+                  alt="Swahilies"
                   priority
                   className="h-7 w-auto"
                 />
