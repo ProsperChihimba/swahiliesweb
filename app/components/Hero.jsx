@@ -2,173 +2,152 @@
 
 import { useRef } from 'react'
 import gsap from 'gsap'
-import { ArrowRight } from 'lucide-react'
-import start from '../../public/assets/images/star1.svg'
-import Image from 'next/image'
+import { FaApple, FaGooglePlay } from 'react-icons/fa'
 import { useGSAP } from '@gsap/react'
+import { APP_STORE_URL, PLAY_STORE_URL } from '../lib/storeLinks'
 
 export default function Hero() {
   const heroRef = useRef(null)
   const titleRef = useRef(null)
-  const subtitleRef = useRef(null)
   const descRef = useRef(null)
   const ctaRef = useRef(null)
-  const visualRef = useRef(null)
-  const starRef = useRef(null)
-  const redLineRef = useRef(null)
-  const blueLineRef = useRef(null)
+  const chipsRef = useRef(null)
 
   useGSAP(() => {
     const ctx = gsap.context(() => {
-      // Master timeline for sequential animations
-      const masterTl = gsap.timeline({ delay: 0.3 })
+      const tl = gsap.timeline({ delay: 0.2 })
 
-      // Step 1: Rotate star image 90 degrees
-      masterTl.from(starRef.current, {
-        rotation: 0,
-        duration: 0.8,
-        ease: 'power2.inOut'
-      })
-      .to(starRef.current, {
-        rotation: 180,
-        duration: 0.8,
-        ease: 'power2.inOut'
-      }, '-=0.8')
-
-      // Step 2: Expand the lines from 20px to full width
-      masterTl.to([redLineRef.current, blueLineRef.current], {
-        width: '100%',
-        duration: 1.2,
-        ease: 'power3.inOut',
-        stagger: 0.1
-      }, '+=0.2')
-
-      // Step 3: Animate content elements together after lines expand
-      // H1 comes from top
-      masterTl.from(titleRef.current, {
-        y: -100,
-        opacity: 0,
-        duration: 1,
-        ease: 'power3.out'
-      }, '-=0.3')
-
-      // H2 comes from bottom (same time as h1)
-      masterTl.from(subtitleRef.current, {
-        y: 100,
-        opacity: 0,
-        duration: 1,
-        ease: 'power3.out'
-      }, '<')
-
-      // Paragraph comes from top (same time as h1 and h2)
-      masterTl.from(descRef.current, {
-        y: -50,
+      tl.from(titleRef.current, {
+        y: -60,
         opacity: 0,
         duration: 0.9,
-        ease: 'power2.out'
-      }, '<')
-
-      // Button comes from bottom (same time as others)
-      if (ctaRef.current) {
-        gsap.set(ctaRef.current, { y: 50, opacity: 0 })
-        masterTl.to(ctaRef.current, {
-          y: 0,
-          opacity: 1,
-          duration: 0.9,
-          ease: 'back.out(1.7)',
-          clearProps: 'transform'
-        }, '<')
-      }
-
-      // Visual element fades in
-      masterTl.from(visualRef.current, {
-        scale: 0.8,
-        opacity: 0,
-        duration: 1,
-        ease: 'power2.out'
-      }, '<')
-
-      // Floating animation for visual elements (continuous)
-      gsap.to(visualRef.current, {
-        y: -20,
-        duration: 2,
-        repeat: -1,
-        yoyo: true,
-        ease: 'power1.inOut'
+        ease: 'power3.out',
       })
+
+      tl.from(
+        descRef.current,
+        { y: -30, opacity: 0, duration: 0.7, ease: 'power2.out' },
+        '-=0.5',
+      )
+
+      tl.from(
+        ctaRef.current,
+        { y: 30, opacity: 0, duration: 0.7, ease: 'back.out(1.5)' },
+        '-=0.3',
+      )
+
+      tl.from(
+        chipsRef.current?.children ?? [],
+        { y: 20, opacity: 0, duration: 0.5, stagger: 0.08, ease: 'power2.out' },
+        '-=0.4',
+      )
     }, heroRef)
 
     return () => ctx.revert()
   }, { scope: heroRef })
 
   return (
-    <section ref={heroRef} className="hero-pin min-h-screen mesh-gradient overflow-hidden max-[768px]:flex max-[768px]:items-center pt-16 max-[768px]:pt-0">
-      {/* Decorative elements */}
-      <div className="absolute top-20 left-10 w-64 h-64 bg-keytom-purple/20 rounded-full blur-3xl max-[768px]:hidden" />
-      <div className="absolute bottom-20 right-10 w-96 h-96 bg-keytom-peach/30 rounded-full blur-3xl max-[768px]:hidden" />
-      <div className="absolute bottom-20 left-10 w-96 h-96 bg-yellow-300/25 rounded-full blur-3xl max-[768px]:hidden" />
-      
-      <div className="lg:pl-14  mx-auto px-6 pb-20 relative z-10 pt-16 max-[768px]:pt-0 max-[768px]:pb-12">
-        <div className="grid  relative lg:grid-cols-[1.1fr_0.9fr] items-start min-h-[45vh] max-[768px]:min-h-[28vh] max-[768px]:gap-6">
-          <div>
-            <div ref={titleRef} className="overflow-hidden">
-              <h1 className="text-[clamp(1.2rem,8vw,5rem)] font-bolder text-[#38488B]  leading-[0.9] tracking-[-0.02em]">
-                Financial<br />Institution
-              </h1>
-            </div>
-          </div>
-          <div ref={subtitleRef} className="text-right absolute bottom-0 right-0 max-[768px]:static  max-[768px]:mt-4">
-            <h2 className="text-[clamp(2.8rem,6vw,5rem)] max-[768px]:text-3xl font-semibold text-[#38488B] leading-[0.9] tracking-[-0.01em]">
-              Imagine<br />more
-            </h2>
-          </div>
+    <section
+      ref={heroRef}
+      className="hero-pin min-h-screen mesh-gradient overflow-hidden pt-20 pb-24 max-[768px]:pt-24 max-[768px]:pb-16 relative"
+    >
+      {/* Decorative wash orbs */}
+      <div className="absolute top-20 left-10 w-72 h-72 rounded-full blur-3xl max-[768px]:hidden"
+           style={{ background: 'var(--wash-lavender)', opacity: 0.7 }} />
+      <div className="absolute bottom-24 right-10 w-[28rem] h-[28rem] rounded-full blur-3xl max-[768px]:hidden"
+           style={{ background: 'var(--wash-peach)', opacity: 0.7 }} />
+      <div className="absolute bottom-16 left-1/3 w-80 h-80 rounded-full blur-3xl max-[768px]:hidden"
+           style={{ background: 'var(--wash-cream)', opacity: 0.7 }} />
+
+      <div className="relative z-10 mx-auto max-w-6xl px-6">
+        <div ref={titleRef} className="max-w-4xl">
+          <h1
+            className="text-[clamp(2.4rem,7vw,4.6rem)] font-semibold leading-[1.02] tracking-[-0.02em]"
+            style={{ color: 'var(--color-primary)' }}
+          >
+            Bookkeeping and payments,
+            <br />
+            built for African SMEs.
+          </h1>
         </div>
 
-        <div className="">
-          <div className="relative">
-            <span 
-              ref={redLineRef}
-              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 block h-[2px] w-[20px] bg-white" 
-            />
-            <span 
-              ref={blueLineRef}
-              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 block h-[2px] w-[20px] bg-white" 
-            />
-            <Image 
-              ref={starRef}
-              src={start} 
-              alt="Start" 
-              className="mx-auto w-12 h-12" 
-            />
-          </div>
+        <p
+          ref={descRef}
+          className="mt-6 max-w-2xl text-base sm:text-lg leading-relaxed"
+          style={{ color: 'var(--color-muted)' }}
+        >
+          One app for business management, cross-border payments, and credit
+          access. Track sales, stock, and debts; pay suppliers locally and
+          abroad at fair rates; and unlock loans powered by your transaction
+          history.
+        </p>
+
+        <div
+          ref={ctaRef}
+          className="mt-8 flex flex-wrap items-center gap-3"
+        >
+          <a
+            href={APP_STORE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group inline-flex items-center gap-3 rounded-md text-white px-5 py-3 text-sm font-semibold hover:opacity-90 transition-opacity"
+            style={{ background: 'var(--color-primary)' }}
+          >
+            <FaApple className="text-xl" />
+            <span className="flex flex-col items-start leading-tight">
+              <span className="text-[0.65rem] font-medium opacity-80">Download on the</span>
+              <span>App Store</span>
+            </span>
+          </a>
+          <a
+            href={PLAY_STORE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group inline-flex items-center gap-3 rounded-md text-white px-5 py-3 text-sm font-semibold hover:opacity-90 transition-opacity"
+            style={{ background: 'var(--color-primary)' }}
+          >
+            <FaGooglePlay className="text-xl" />
+            <span className="flex flex-col items-start leading-tight">
+              <span className="text-[0.65rem] font-medium opacity-80">Get it on</span>
+              <span>Google Play</span>
+            </span>
+          </a>
         </div>
 
-        <div className=" grid lg:grid-cols-[1.1fr_0.9fr] items-start max-[768px]:gap-6">
-          <div>
-            <p ref={descRef} className="text-sm intro-headline2 sm:text-base  max-w-md leading-relaxed">
-              Combine your crypto and fiat into one intuitive platform. Instantly send, receive, 
-              and hold funds across currencies, with smart tools and global reach.
-            </p>
-
-            <button 
-              ref={ctaRef}
-              className="group w-full sm:w-72 mt-6 max-[900]:mt-2 px-8 max-[900]:py-5 py-3 bg-[#38488B] text-white  font-semibold text-[0.72rem] 
-                tracking-[0.2em] uppercase flex items-center justify-between
-                transition-all duration-300 hover:translate-y-0.5"
+        <div
+          ref={chipsRef}
+          className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl"
+        >
+          {[
+            { sw: 'Malipo', en: 'Payments' },
+            { sw: 'Wateja', en: 'Customers' },
+            { sw: 'Invoice', en: 'Invoicing' },
+            { sw: 'Loans', en: 'Credit' },
+          ].map((chip) => (
+            <div
+              key={chip.sw}
+              className="rounded-xl border px-4 py-3 backdrop-blur-sm"
+              style={{
+                background: 'rgba(255, 255, 255, 0.6)',
+                borderColor: 'var(--color-border)',
+              }}
             >
-              Open account
-              <span className="w-7 h-7 rotate-3 rounded-full bg-white/20 flex items-center justify-center">
-                <ArrowRight className="group-hover:translate-x-1 transition-transform" size={14} />
-              </span>
-            </button>
-          </div>
-          <div ref={visualRef} className="relative hidden lg:block">
-            <div className="absolute inset-0 bg-gradient-to-br from-keytom-peach/40 via-keytom-purple/30 to-keytom-blue/30 rounded-[40%] blur-2xl opacity-70" />
-          </div>
+              <div
+                className="text-base font-semibold leading-tight"
+                style={{ color: 'var(--color-primary)' }}
+              >
+                {chip.sw}
+              </div>
+              <div
+                className="text-xs mt-0.5"
+                style={{ color: 'var(--color-muted)' }}
+              >
+                {chip.en}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
-
-
     </section>
   )
 }
