@@ -11,6 +11,7 @@ import { FaLinkedinIn } from "react-icons/fa";
 import { PiTelegramLogoFill } from "react-icons/pi";
 import { FaInstagram } from "react-icons/fa6";
 import { FaXTwitter } from "react-icons/fa6";
+import { APP_STORE_URL, PLAY_STORE_URL } from "../lib/storeLinks";
 
 
 export default function Footer() {
@@ -68,7 +69,12 @@ export default function Footer() {
 
           <div className="mt-12 flex items-center justify-between gap-6">
             <div className="flex gap-2 max-[900px]:mb-3">
-              <button className="relative border border-white/70 rounded-1 px-2 py-1 pl-6 bg-transparent text-white font-semibold text-[0.7rem] max-[900px]:text-[0.4rem] leading-[1.1] flex flex-col items-start">
+              <a
+                href={APP_STORE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative border border-white/70 rounded-1 px-2 py-1 pl-6 bg-transparent text-white font-semibold text-[0.7rem] max-[900px]:text-[0.4rem] leading-[1.1] flex flex-col items-start hover:bg-white/10 transition-colors"
+              >
                 <span className="absolute left-[4px] top-1/2 -translate-y-1/2 lg:text-[1.15rem] md:text-[1.15rem] text-[0.8rem] opacity-95">
                   <FaApple />
                 </span>
@@ -76,8 +82,13 @@ export default function Footer() {
                   Download on the
                 </span>
                 App Store
-              </button>
-              <button className="relative border border-white/70 rounded-1 px-2 py-1 pl-6 bg-transparent text-white font-semibold text-[0.7rem] max-[900px]:text-[0.4rem] leading-[1.1] flex flex-col items-start">
+              </a>
+              <a
+                href={PLAY_STORE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative border border-white/70 rounded-1 px-2 py-1 pl-6 bg-transparent text-white font-semibold text-[0.7rem] max-[900px]:text-[0.4rem] leading-[1.1] flex flex-col items-start hover:bg-white/10 transition-colors"
+              >
                 <span className="absolute left-1 top-1/2 -translate-y-1/2 lg:text-[1.15rem] md:text-[1.15rem] text-[0.8rem] opacity-95">
                   <FaGooglePlay />
                 </span>
@@ -85,7 +96,7 @@ export default function Footer() {
                   Get it on
                 </span>
                 Google Play
-              </button>
+              </a>
             </div>
             <div className="flex items-center gap-3 mb-3">
               <span className="w-9 h-9 max-[900px]:w-5 max-[900px]:h-5 rounded-xs border border-white/70 flex items-center justify-center text-[1.1rem] max-[900px]:text-[0.7rem] ">

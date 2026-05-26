@@ -2,54 +2,40 @@
 
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import { TbArrowsExchange2 } from "react-icons/tb";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import image from "../../public/assets/images/swahi1.png";
 import Image from "next/image";
 import { useGSAP } from "@gsap/react";
 import {
-  FaExchangeAlt,
-  FaWallet,
-  FaBolt,
-  FaCreditCard,
   FaApple,
   FaGooglePlay,
+  FaBook,
+  FaUniversity,
+  FaHandHoldingUsd,
 } from "react-icons/fa";
+import { APP_STORE_URL, PLAY_STORE_URL } from "../lib/storeLinks";
 
 const services = [
   {
-    icon: FaExchangeAlt,
-    title: (
-      <>
-        Instant crypto{" "}
-        <TbArrowsExchange2 className="inline-block text-[1.25rem] align-[-0.15em]" />{" "}
-        fiat exchange
-      </>
-    ),
+    icon: FaBook,
+    title: "Business management",
     description:
-      "Swap crypto to crypto or crypto to euros at Tier-1 exchange rates, with access to over 100 trading pairs - all in one seamless platform.",
-    label: "exchange",
+      "SMEs manage sales, stock, and debts on Swahilies — improving record-keeping and reducing losses. Built around how African small businesses actually run.",
+    label: "business management",
   },
   {
-    icon: FaWallet,
-    title: "Crypto wallet and personal IBAN",
+    icon: FaUniversity,
+    title: "Collection & banking",
     description:
-      "Securely store crypto and manage your euro funds with a personal IBAN - all from a single, intuitive interface. Supports major cryptocurrencies (BTC, ETH, USDC, etc.) and EUR transactions, from deposits to payments.",
-    label: "crypto & iban",
+      "Receive digital payments from customers and pay suppliers locally and abroad at fair rates. Saves time, reduces costs, and builds the trust SMEs need to grow.",
+    label: "collection & banking",
   },
   {
-    icon: FaBolt,
-    title: "Simple deposits and withdrawals",
+    icon: FaHandHoldingUsd,
+    title: "Credit & lending",
     description:
-      "Top up your wallet, exchange crypto to euros, and withdraw directly to your IBAN. SEPA/SEPA Instant transfers are fully integrated for smooth transactions.",
-    label: "instant transfer",
-  },
-  {
-    icon: FaCreditCard,
-    title: "Virtual cards with auto-conversion",
-    description:
-      "Issue virtual cards linked to your crypto accounts. Spend fiat or crypto online and offline via your phone, with automatic conversion at checkout.",
-    label: "virtual cards",
+      "Request loans directly from the app. Your daily transactions build a credit profile that makes you visible to our lending partners — capital-light, risk-free.",
+    label: "credit & lending",
   },
 ];
 
@@ -57,7 +43,7 @@ export default function Services() {
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(1);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   useGSAP(() => {
     const ctx = gsap.context(() => {
@@ -98,32 +84,37 @@ export default function Services() {
     <section
       ref={sectionRef}
       data-nav-theme="light"
-      className="bg-[#3c56ab]  relative  z-40 text-white py-28 max-[900px]:py-20"
+      className="relative z-40 text-white py-28 max-[900px]:py-20"
+      style={{ background: 'var(--color-primary)' }}
     >
       <div className="container mx-auto px-6">
         <h2
           ref={titleRef}
           className="text-center font-semibold leading-[1.1] text-5xl mb-12 max-[768px]:text-2xl"
         >
-          <span className="block">Manage your fiat and crypto</span>
-          <span className="block">-all in one app</span>
+          <span className="block">Manage your business</span>
+          <span className="block">— all in one app</span>
         </h2>
 
         <div className="flex justify-center mb-11 relative">
           <div
             ref={cardRef}
-            className="relative w-full max-w-[54rem] min-w-[53rem] bg-[#3d57b0] border border-white/20 lg:rounded-[14px] md:rounded-[14px] px-7 py-6 max-[900px]:min-w-0 max-[900px]:max-w-full max-[768px]:px-5 max-[768px]:py-5"
+            className="relative w-full max-w-[54rem] min-w-[53rem] border border-white/20 lg:rounded-[14px] md:rounded-[14px] px-7 py-6 max-[900px]:min-w-0 max-[900px]:max-w-full max-[768px]:px-5 max-[768px]:py-5"
+            style={{ background: 'rgba(255, 255, 255, 0.04)' }}
           >
             <div className="flex items-start gap-10 max-[900px]:flex-col max-[900px]:gap-0">
               {/* Left side: Badge and Text */}
               <div className="flex-1">
                 <div className="inline-flex items-center gap-2 lg:px-4 md:px-4 px-3 py-1 rounded-full border border-white/45 text-[0.9rem] lowercase">
-                  <span className="w-2 h-2 rounded-full bg-[#ffefac]" />
+                  <span className="w-2 h-2 rounded-full" style={{ background: 'var(--color-accent)' }} />
                   services
                 </div>
 
                 <div className="mt-24 hidden md:block lg:block">
-                  <h3 className="text-[1.7rem] font-semibold text-[#ffefac] mb-3">
+                  <h3
+                    className="text-[1.7rem] font-semibold mb-3"
+                    style={{ color: 'var(--color-accent)' }}
+                  >
                     {activeService.title}
                   </h3>
                   <p className="text-white/80 leading-relaxed text-base">
@@ -143,7 +134,10 @@ export default function Services() {
                 />
               </div>
               <div className=" block lg:hidden  md:hidden">
-                <h3 className="text-[1rem] font-semibold text-[#ffefac] mb-3">
+                <h3
+                  className="text-[1rem] font-semibold mb-3"
+                  style={{ color: 'var(--color-accent)' }}
+                >
                   {activeService.title}
                 </h3>
                 <p className="text-white/80 leading-relaxed text-base">
@@ -184,7 +178,12 @@ export default function Services() {
           </div>
 
           <div className="flex flex-wrap gap-2">
-            <button className="relative border border-white/70 rounded-1 px-2 py-1 pl-6 bg-transparent text-white font-semibold text-[0.7rem] leading-[1.1] flex flex-col items-start">
+            <a
+              href={APP_STORE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative border border-white/70 rounded-1 px-2 py-1 pl-6 bg-transparent text-white font-semibold text-[0.7rem] leading-[1.1] flex flex-col items-start hover:bg-white/10 transition-colors"
+            >
               <span className="absolute left-[4px] top-1/2 -translate-y-1/2 text-[1.15rem] opacity-95">
                 <FaApple />
               </span>
@@ -192,8 +191,13 @@ export default function Services() {
                 Download on the
               </span>
               App Store
-            </button>
-            <button className="relative border border-white/70 rounded-1 px-2 py-1 pl-6 bg-transparent text-white font-semibold text-[0.7rem] leading-[1.1] flex flex-col items-start">
+            </a>
+            <a
+              href={PLAY_STORE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative border border-white/70 rounded-1 px-2 py-1 pl-6 bg-transparent text-white font-semibold text-[0.7rem] leading-[1.1] flex flex-col items-start hover:bg-white/10 transition-colors"
+            >
               <span className="absolute left-[4px] top-1/2 -translate-y-1/2 text-[1.15rem] opacity-95">
                 <FaGooglePlay />
               </span>
@@ -201,7 +205,7 @@ export default function Services() {
                 Get it on
               </span>
               Google Play
-            </button>
+            </a>
           </div>
         </div>
       </div>
