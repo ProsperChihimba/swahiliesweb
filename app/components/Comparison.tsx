@@ -5,71 +5,47 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { IoCheckmark, IoClose, IoWarning } from "react-icons/io5";
-import { IoArrowForwardCircleOutline } from "react-icons/io5";
 
 type Status = "yes" | "no" | "limited";
 
+type Cell = { status: Status; note: string };
+
 type Feature = {
   name: string;
-  sub?: string;
-  subMuted?: string;
-  keytom: { status: Status; note: string };
-  others: { status: Status; note: string };
-  otc: { status: Status; note: string };
+  swahilies: Cell;
+  banks: Cell;
+  remittance: Cell;
+  smeTools: Cell;
 };
 
 const features: Feature[] = [
   {
-    name: "Multi-currency account (crypto + fiat)",
-    keytom: { status: "yes", note: "Yes" },
-    others: { status: "limited", note: "Limited support, often separated" },
-    otc: { status: "no", note: "No" },
+    name: "First-mover in data monetization",
+    swahilies: { status: "yes", note: "Infrastructure to power future SME finance" },
+    banks: { status: "no", note: "Not designed for SME data" },
+    remittance: { status: "no", note: "Only transaction-level data" },
+    smeTools: { status: "no", note: "Limited business activity data" },
   },
   {
-    name: "Integrated crypto exchange",
-    keytom: { status: "yes", note: "Yes" },
-    others: { status: "limited", note: "Limited or non-existent" },
-    otc: { status: "yes", note: "Yes" },
+    name: "Proprietary SME data engine",
+    swahilies: { status: "yes", note: "Operational and financial data" },
+    banks: { status: "no", note: "Only transactions" },
+    remittance: { status: "no", note: "Only transaction-level data" },
+    smeTools: { status: "limited", note: "Good data, but not localized" },
   },
   {
-    name: "IBAN/fiat accounts",
-    keytom: { status: "yes", note: "Yes (named IBANs for SEPA transactions)" },
-    others: { status: "limited", note: "Limited to EU/UK accounts" },
-    otc: { status: "no", note: "No" },
+    name: "Capital-light, risk-free lending model",
+    swahilies: { status: "yes", note: "Off-balance sheet loans" },
+    banks: { status: "no", note: "Only transactions" },
+    remittance: { status: "no", note: "No lending role" },
+    smeTools: { status: "no", note: "No lending role" },
   },
   {
-    name: "Third Party Payments",
-    keytom: {
-      status: "yes",
-      note: "Yes (to and from businesses and individuals)",
-    },
-    others: { status: "yes", note: "Yes" },
-    otc: { status: "no", note: "No" },
-  },
-  {
-    name: "Virtual & Physical cards",
-    subMuted: "(coming soon)",
-    keytom: { status: "yes", note: "Yes" },
-    others: { status: "limited", note: "Yes, but not crypto friendly" },
-    otc: {
-      status: "limited",
-      note: "Some offer only virtual or prepaid cards",
-    },
-  },
-  {
-    name: "Time saving account opening",
-    keytom: {
-      status: "yes",
-      note: "Up to 5 business days for businesses, just a few minutes for individuals. Fully online.",
-    },
-    others: { status: "limited", note: "Takes weeks, often offline" },
-    otc: { status: "yes", note: "Quick" },
-  },
-  {
-    name: "Global availability",
-    keytom: { status: "yes", note: "High (access in 126+ countries)" },
-    others: { status: "limited", note: "Limited to certain regions" },
-    otc: { status: "yes", note: "High" },
+    name: "Instant cross-border payments",
+    swahilies: { status: "yes", note: "Instant payment" },
+    banks: { status: "no", note: "Takes 1–3 days" },
+    remittance: { status: "limited", note: "Same day to 3 days" },
+    smeTools: { status: "no", note: "No cross-border payments" },
   },
 ];
 
@@ -113,18 +89,29 @@ export default function Comparison() {
     switch (status) {
       case "yes":
         return (
-          <span className="w-5 h-5 rounded-full inline-flex items-center justify-center bg-[#38488B] text-white flex-shrink-0">
+          <span
+            className="w-5 h-5 rounded-full inline-flex items-center justify-center text-white flex-shrink-0"
+            style={{ background: "var(--color-success)" }}
+          >
             <IoCheckmark className="text-sm" />
           </span>
         );
       case "no":
         return (
-          <span className="w-5 h-5 rounded-full inline-flex items-center justify-center bg-[#666666] text-white flex-shrink-0">
+          <span
+            className="w-5 h-5 rounded-full inline-flex items-center justify-center text-white flex-shrink-0"
+            style={{ background: "var(--color-danger)" }}
+          >
             <IoClose className="text-sm" />
           </span>
         );
       case "limited":
-        return <IoWarning className="text-[#666666] text-xl flex-shrink-0" />;
+        return (
+          <IoWarning
+            className="text-xl flex-shrink-0"
+            style={{ color: "var(--color-warning)" }}
+          />
+        );
       default:
         return null;
     }
@@ -133,31 +120,57 @@ export default function Comparison() {
   return (
     <section
       ref={sectionRef}
-      className="bg-white text-[#1f1f1f] py-20 md:py-28"
+      className="py-20 md:py-28"
+      style={{ background: "var(--color-bg)", color: "var(--color-text)" }}
     >
       <div className=" mx-auto px-4 md:px-6">
         <h2
           ref={titleRef}
-          className="text-center font-semibold text-3xl md:text-5xl lg:text-6xl text-[#4a4a4a] mb-8 md:mb-12"
+          className="text-center font-semibold text-3xl md:text-5xl lg:text-6xl mb-8 md:mb-12"
+          style={{ color: "var(--color-primary)" }}
         >
-          <span className="text-[#3657ba]">Keytom</span> vs others
+          How <span style={{ color: "var(--color-accent)" }}>Swahilies</span> compares
         </h2>
 
         {/* Desktop Table View */}
-        <div ref={tableRef} className="hidden lg:block max-w-[1160px] mx-auto">
+        <div ref={tableRef} className="hidden lg:block max-w-[1240px] mx-auto">
           {/* Table Header */}
-          <div className="grid grid-cols-[1.25fr_1.2fr_1.35fr_0.8fr] border-b border-[#d8dff4]">
-            <div className="px-5 py-4 font-semibold text-[#4a4a4a] text-base">
+          <div
+            className="grid grid-cols-[1.4fr_1.1fr_1.1fr_1.1fr_1.1fr] border-b"
+            style={{ borderColor: "var(--color-border)" }}
+          >
+            <div
+              className="px-5 py-4 font-semibold text-base"
+              style={{ color: "var(--color-muted)" }}
+            >
               Feature
             </div>
-            <div className="px-5 py-4 font-semibold text-[#3657ba] text-base bg-[#e8ebf7] rounded-tl-xl">
-              Keytom
+            <div
+              className="px-5 py-4 font-semibold text-base rounded-tl-xl"
+              style={{
+                background: "var(--wash-lavender)",
+                color: "var(--color-primary)",
+              }}
+            >
+              Swahilies
             </div>
-            <div className="px-5 py-4 font-semibold text-[#4a4a4a] text-base">
-              Other financial institutions
+            <div
+              className="px-5 py-4 font-semibold text-base"
+              style={{ color: "var(--color-muted)" }}
+            >
+              Traditional Banks
             </div>
-            <div className="px-5 py-4 font-semibold text-[#4a4a4a] text-base">
-              OTC
+            <div
+              className="px-5 py-4 font-semibold text-base"
+              style={{ color: "var(--color-muted)" }}
+            >
+              Western Union & MoneyGram
+            </div>
+            <div
+              className="px-5 py-4 font-semibold text-base"
+              style={{ color: "var(--color-muted)" }}
+            >
+              Bumpa, Settlo, QuickBooks
             </div>
           </div>
 
@@ -165,32 +178,58 @@ export default function Comparison() {
           {features.map((feature, index) => (
             <div
               key={index}
-              className="comparison-feature grid grid-cols-[1.25fr_1.2fr_1.35fr_0.8fr] border-b border-[#d8dff4] last:border-b-0"
+              className="comparison-feature grid grid-cols-[1.4fr_1.1fr_1.1fr_1.1fr_1.1fr] border-b last:border-b-0"
+              style={{ borderColor: "var(--color-border)" }}
             >
               <div className="px-5 py-5 flex flex-col gap-1">
-                <span className="text-[0.9rem] max-[900px]:text-[1.05rem] font-semibold text-[#3657ba] leading-tight">
+                <span
+                  className="text-[0.95rem] font-semibold leading-tight"
+                  style={{ color: "var(--color-primary)" }}
+                >
                   {feature.name}
                 </span>
               </div>
 
-              <div className="px-5 py-5 flex items-center gap-3 bg-[#e8ebf7]">
-                {getIcon(feature.keytom.status)}
-                <span className="text-[0.8rem] max-[900px]:text-[1.05rem]  text-[#4a4a4a] leading-snug">
-                  {feature.keytom.note}
+              <div
+                className="px-5 py-5 flex items-center gap-3"
+                style={{ background: "var(--wash-lavender)" }}
+              >
+                {getIcon(feature.swahilies.status)}
+                <span
+                  className="text-[0.85rem] leading-snug"
+                  style={{ color: "var(--color-primary)" }}
+                >
+                  {feature.swahilies.note}
                 </span>
               </div>
 
               <div className="px-5 py-5 flex items-center gap-3">
-                {getIcon(feature.others.status)}
-                <span className="text-[0.8rem] max-[900px]:text-[1.05rem] text-[#4a4a4a] leading-snug">
-                  {feature.others.note}
+                {getIcon(feature.banks.status)}
+                <span
+                  className="text-[0.85rem] leading-snug"
+                  style={{ color: "var(--color-muted)" }}
+                >
+                  {feature.banks.note}
                 </span>
               </div>
 
               <div className="px-5 py-5 flex items-center gap-3">
-                {getIcon(feature.otc.status)}
-                <span className="text-[0.8rem] max-[900px]:text-[1.05rem] text-[#4a4a4a] leading-snug">
-                  {feature.otc.note}
+                {getIcon(feature.remittance.status)}
+                <span
+                  className="text-[0.85rem] leading-snug"
+                  style={{ color: "var(--color-muted)" }}
+                >
+                  {feature.remittance.note}
+                </span>
+              </div>
+
+              <div className="px-5 py-5 flex items-center gap-3">
+                {getIcon(feature.smeTools.status)}
+                <span
+                  className="text-[0.85rem] leading-snug"
+                  style={{ color: "var(--color-muted)" }}
+                >
+                  {feature.smeTools.note}
                 </span>
               </div>
             </div>
@@ -202,79 +241,103 @@ export default function Comparison() {
           {features.map((feature, index) => (
             <div
               key={index}
-              className="comparison-feature border-b border-gray-200 pb-3"
+              className="comparison-feature border-b pb-3"
+              style={{ borderColor: "var(--color-border)" }}
             >
-              {/* Feature Title */}
-              <h3 className="text-xl md:text-2xl font-semibold text-[#38488B] mb-5">
+              <h3
+                className="text-xl md:text-2xl font-semibold mb-4"
+                style={{ color: "var(--color-primary)" }}
+              >
                 {feature.name}
               </h3>
 
-              {/* Options Stack */}
               <div className="space-y-3">
-                {/* Keytom */}
-                <div className="bg-[linear-gradient(180deg,#9D7BA328_0%,#B58CAB2A_45%,#D4A8A124_100%)] rounded-xs  p-4 px-2">
-                  <div className="flex items-start gap-3">
-                    <div className="flex-1 flex gap-5 justify-between">
-                      <div className="font-semibold text-[#38488B] text-[12px] mb-1">
-                        Keytom
-                      </div>
-                      <div className="flex items-start gap-2">
-                        {getIcon(feature.keytom.status)}
-
-                        <div className="text-[#4a4a4a] text-[12px] leading-relaxed">
-                          {feature.keytom.note}
-                        </div>
-                      </div>
+                <div
+                  className="rounded-md p-4 flex justify-between gap-3 items-start"
+                  style={{ background: "var(--wash-lavender)" }}
+                >
+                  <div
+                    className="font-semibold text-[0.85rem]"
+                    style={{ color: "var(--color-primary)" }}
+                  >
+                    Swahilies
+                  </div>
+                  <div className="flex items-start gap-2">
+                    {getIcon(feature.swahilies.status)}
+                    <div
+                      className="text-[0.8rem] leading-relaxed"
+                      style={{ color: "var(--color-primary)" }}
+                    >
+                      {feature.swahilies.note}
                     </div>
                   </div>
                 </div>
 
-                {/* Other Neobanks */}
-                <div className="bg-white border-t border-gray-200 p-4 px-2">
-                  <div className="flex items-start gap-3">
-                    <div className="flex-1 flex justify-between ">
-                      <div className="font-semibold text-[#38488B] text-[12px] mb-1">
-                        Other Neobanks
-                      </div>
-                      <div className="flex gap-3 items-start">
-                        {getIcon(feature.others.status)}
-
-                        <div className="text-[#4a4a4a] text-[12px] leading-relaxed">
-                          {feature.others.note}
-                        </div>
-                      </div>
+                <div
+                  className="border-t p-4 flex justify-between gap-3 items-start"
+                  style={{ borderColor: "var(--color-border)" }}
+                >
+                  <div
+                    className="font-semibold text-[0.85rem]"
+                    style={{ color: "var(--color-muted)" }}
+                  >
+                    Traditional Banks
+                  </div>
+                  <div className="flex items-start gap-2">
+                    {getIcon(feature.banks.status)}
+                    <div
+                      className="text-[0.8rem] leading-relaxed"
+                      style={{ color: "var(--color-muted)" }}
+                    >
+                      {feature.banks.note}
                     </div>
                   </div>
                 </div>
 
-                {/* OTC */}
-                <div className="bg-white border-t border-gray-200 p-4">
-                  <div className="flex items-start gap-3">
-                    <div className="flex-1 flex justify-between">
-                      <div className="font-semibold text-[#38488B] text-[12px] mb-1">
-                        OTC
-                      </div>
-                      <div className="flex gap-2 items-start">
-                        {getIcon(feature.otc.status)}
+                <div
+                  className="border-t p-4 flex justify-between gap-3 items-start"
+                  style={{ borderColor: "var(--color-border)" }}
+                >
+                  <div
+                    className="font-semibold text-[0.85rem]"
+                    style={{ color: "var(--color-muted)" }}
+                  >
+                    Western Union & MoneyGram
+                  </div>
+                  <div className="flex items-start gap-2">
+                    {getIcon(feature.remittance.status)}
+                    <div
+                      className="text-[0.8rem] leading-relaxed"
+                      style={{ color: "var(--color-muted)" }}
+                    >
+                      {feature.remittance.note}
+                    </div>
+                  </div>
+                </div>
 
-                        <div className="text-[#4a4a4a] text-[12px] leading-relaxed">
-                          {feature.otc.note}
-                        </div>
-                      </div>
+                <div
+                  className="border-t p-4 flex justify-between gap-3 items-start"
+                  style={{ borderColor: "var(--color-border)" }}
+                >
+                  <div
+                    className="font-semibold text-[0.85rem]"
+                    style={{ color: "var(--color-muted)" }}
+                  >
+                    Bumpa, Settlo, QuickBooks
+                  </div>
+                  <div className="flex items-start gap-2">
+                    {getIcon(feature.smeTools.status)}
+                    <div
+                      className="text-[0.8rem] leading-relaxed"
+                      style={{ color: "var(--color-muted)" }}
+                    >
+                      {feature.smeTools.note}
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           ))}
-        </div>
-
-        {/* CTA Button */}
-        <div className="max-w-[1160px]  flex justify-center lg:max-w-2xl mx-auto mt-8 md:mt-10">
-          <button className="w-full md:w-auto inline-flex items-center justify-center gap-3 bg-gradient-to-r from-[#422de1] to-[#2f458b] text-white px-16 py-4 rounded-xs font-semibold text-sm uppercase tracking-wide  transition-shadow duration-300">
-            Open account{" "}
-            <IoArrowForwardCircleOutline className="text-lg rotate-3" />
-          </button>
         </div>
       </div>
     </section>
