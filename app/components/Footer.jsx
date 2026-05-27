@@ -8,10 +8,10 @@ import { FaChevronDown, FaArrowRight } from "react-icons/fa";
 import { FaApple, FaGooglePlay } from "react-icons/fa";
 import { MdOutlineLogout } from "react-icons/md";
 import { FaLinkedinIn } from "react-icons/fa";
-import { PiTelegramLogoFill } from "react-icons/pi";
 import { FaInstagram } from "react-icons/fa6";
 import { FaXTwitter } from "react-icons/fa6";
 import { APP_STORE_URL, PLAY_STORE_URL } from "../lib/storeLinks";
+import { LINKEDIN_URL, INSTAGRAM_URL, X_URL } from "../lib/socialLinks";
 
 
 export default function Footer() {
@@ -99,18 +99,33 @@ export default function Footer() {
               </a>
             </div>
             <div className="flex items-center gap-3 mb-3">
-              <span className="w-9 h-9 max-[900px]:w-5 max-[900px]:h-5 rounded-xs border border-white/70 flex items-center justify-center text-[1.1rem] max-[900px]:text-[0.7rem] ">
+              <a
+                href={LINKEDIN_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Swahilies on LinkedIn"
+                className="w-9 h-9 max-[900px]:w-5 max-[900px]:h-5 rounded-xs border border-white/70 flex items-center justify-center text-[1.1rem] max-[900px]:text-[0.7rem] hover:bg-white/10 transition-colors"
+              >
                 <FaLinkedinIn />
-              </span>
-              <span className="w-9 h-9 max-[900px]:w-5 max-[900px]:h-5 rounded-xs border border-white/70 flex items-center justify-center text-[1.1rem] max-[900px]:text-[0.7rem] ">
-                <PiTelegramLogoFill />
-              </span>
-              <span className="w-9 h-9 max-[900px]:w-5 max-[900px]:h-5 rounded-xs border border-white/70 flex items-center justify-center text-[1.1rem] max-[900px]:text-[0.7rem] ">
+              </a>
+              <a
+                href={X_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Swahilies on X"
+                className="w-9 h-9 max-[900px]:w-5 max-[900px]:h-5 rounded-xs border border-white/70 flex items-center justify-center text-[1.1rem] max-[900px]:text-[0.7rem] hover:bg-white/10 transition-colors"
+              >
                 <FaXTwitter />
-              </span>
-              <span className="w-9 h-9 max-[900px]:w-5 max-[900px]:h-5 rounded-xs border border-white/70 flex items-center justify-center text-[1.1rem] max-[900px]:text-[0.7rem] ">
+              </a>
+              <a
+                href={INSTAGRAM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Swahilies on Instagram"
+                className="w-9 h-9 max-[900px]:w-5 max-[900px]:h-5 rounded-xs border border-white/70 flex items-center justify-center text-[1.1rem] max-[900px]:text-[0.7rem] hover:bg-white/10 transition-colors"
+              >
                 <FaInstagram />
-              </span>
+              </a>
             </div>
           </div>
         </div>
@@ -139,7 +154,10 @@ export default function Footer() {
             </button>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex flex-col items-end gap-1 max-[900px]:items-start">
+            <span className="text-[0.85rem] text-white/70 leading-snug max-w-xs text-right max-[900px]:text-left">
+              Building the operating and financial system for Africa's 100M SMEs.
+            </span>
             <span className="font-semibold text-[0.95rem]">
               © Swahilies Inc. 2026
             </span>
