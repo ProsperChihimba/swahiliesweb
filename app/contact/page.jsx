@@ -1,9 +1,9 @@
 import Image from "next/image";
 import { FaLinkedinIn } from "react-icons/fa";
-import { PiTelegramLogoFill } from "react-icons/pi";
 import { FaXTwitter, FaInstagram } from "react-icons/fa6";
 import star from "../../public/assets/images/star2.svg";
 import { GiTireIronCross } from "react-icons/gi";
+import { LINKEDIN_URL, INSTAGRAM_URL, X_URL } from "../lib/socialLinks";
 
 export const metadata = {
   title: "Contact",
@@ -32,7 +32,9 @@ function Contact() {
 
           <div className="lg:mt-9 mt-10 float-right">
             <h2 className="text-2xl intro-head">
-              support@keytom.com
+              <a href="mailto:contact@swahilies.com" className="hover:underline">
+                contact@swahilies.com
+              </a>
             </h2>
             <p className="mt-3 max-w-165 text-sm intro-head leading-relaxed text-[#7a7a7a]">
               Whether it's a quick question or a complex request, we're here to
@@ -40,18 +42,33 @@ function Contact() {
             </p>
 
             <div className="mt-6 flex items-center gap-2">
-              <span className="w-12 h-12 rounded-xs border border-[#3a57b5]/60 flex items-center justify-center text-[1.2rem]">
+              <a
+                href={LINKEDIN_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Swahilies on LinkedIn"
+                className="w-12 h-12 rounded-xs border border-[#3a57b5]/60 flex items-center justify-center text-[1.2rem] hover:bg-[#3a57b5]/10 transition-colors"
+              >
                 <FaLinkedinIn />
-              </span>
-              <span className="w-12 h-12 rounded-xs border border-[#3a57b5]/60 flex items-center justify-center text-[1.2rem]">
-                <PiTelegramLogoFill />
-              </span>
-              <span className="w-12 h-12 rounded-xs border border-[#3a57b5]/60 flex items-center justify-center text-[1.2rem]">
+              </a>
+              <a
+                href={X_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Swahilies on X"
+                className="w-12 h-12 rounded-xs border border-[#3a57b5]/60 flex items-center justify-center text-[1.2rem] hover:bg-[#3a57b5]/10 transition-colors"
+              >
                 <FaXTwitter />
-              </span>
-              <span className="w-12 h-12 rounded-xs border border-[#3a57b5]/60 flex items-center justify-center text-[1.2rem]">
+              </a>
+              <a
+                href={INSTAGRAM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Swahilies on Instagram"
+                className="w-12 h-12 rounded-xs border border-[#3a57b5]/60 flex items-center justify-center text-[1.2rem] hover:bg-[#3a57b5]/10 transition-colors"
+              >
                 <FaInstagram />
-              </span>
+              </a>
             </div>
 
             <p className="mt-3 text-sm intro-head text-[#7a7a7a]">
