@@ -71,12 +71,12 @@ export default function BuiltFor() {
               />
               <div className="relative z-10">
                 <h3 className="text-[1.4rem] font-semibold mb-2">
-                  Cross-border supplier payments
+                  Bookkeeping that runs itself
                 </h3>
                 <p className="text-[0.95rem] leading-[1.5] text-white/85">
-                  Pay suppliers in USD, CNY, or INR directly from your TZS
-                  balance — fund via bank transfer, mobile money, or
-                  stablecoin. Fair rates, no extra rails.
+                  Every sale, expense, and customer debt captured automatically.
+                  Stop juggling notebooks, spreadsheets, and screenshots —
+                  Swahilies shows you the numbers that matter.
                 </p>
               </div>
             </div>
@@ -89,14 +89,15 @@ export default function BuiltFor() {
               }}
             >
               <h3 className="text-[1.4rem] font-semibold mb-2">
-                Multi-currency settlement
+                Credit from your real numbers
               </h3>
               <p
                 className="text-[0.95rem] leading-[1.5]"
                 style={{ color: "var(--color-muted)" }}
               >
-                Hold TZS, settle in foreign currency. Customer payments come
-                in, supplier bills go out, you stay in control of the FX.
+                Your daily transactions build a credit profile our lending
+                partners underwrite against — no collateral, no audited books,
+                no waiting room.
               </p>
             </div>
           </div>
@@ -110,14 +111,14 @@ export default function BuiltFor() {
               }}
             >
               <h3 className="text-[1.4rem] font-semibold mb-2">
-                Fast onboarding
+                Open in minutes
               </h3>
               <p
                 className="text-[0.95rem] leading-[1.5]"
                 style={{ color: "var(--color-muted)" }}
               >
-                Open an account on your phone in minutes — no branch visits,
-                no five-day document reviews.
+                Sign up from your phone and start trading the same day. No
+                branch visits, no minimum balance, no five-day reviews.
               </p>
             </div>
 
@@ -130,15 +131,15 @@ export default function BuiltFor() {
             >
               <div>
                 <h3 className="text-[1.4rem] font-semibold mb-2">
-                  In-app loans &amp; credit
+                  Built for how you actually run a business
                 </h3>
                 <p
                   className="text-[0.95rem] leading-[1.5]"
                   style={{ color: "var(--color-muted)" }}
                 >
-                  Request loans directly from the app. Your transaction
-                  history builds the credit profile our lending partners
-                  underwrite against — capital-light, risk-free.
+                  Mobile money native. Stock counts you can trust. Customer
+                  debts in one place. Designed by people who grew up in these
+                  markets — not retrofitted from a US fintech template.
                 </p>
               </div>
 

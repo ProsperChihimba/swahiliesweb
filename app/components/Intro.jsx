@@ -11,8 +11,10 @@ import {
   FaHandHoldingUsd,
   FaBook,
   FaListAlt,
-  FaArrowsAltH,
-  FaMobileAlt,
+  FaBoxes,
+  FaChartLine,
+  FaGlobe,
+  FaCoins,
 } from "react-icons/fa";
 import phone from "../../public/assets/images/phone2.png";
 import card from "../../public/assets/images/swahi1.png";
@@ -412,16 +414,26 @@ export default function Intro() {
         ref={containerRef}
         className="container mx-auto px-6 max-[900px]:px-1  min-h-screen flex items-center justify-center py-28"
       >
-        <p
+        <div
           ref={headlineRef}
-          className="intro-headline text-center lg:max-w-2xl max-[900px]:text-6 z-20 relative"
+          className="text-center lg:max-w-4xl z-20 relative px-2"
         >
-          Pay anywhere. Get paid anywhere. Hold TZS, send USD, CNY or INR — your
-          customers, suppliers, and lenders all in one app.
-        </p>
+          <h2 className="intro-headline">
+            <span className="whitespace-nowrap">
+              All that you need to stay organised
+            </span>
+            <br />
+            and on-top of your game
+          </h2>
+          <p className="intro-subline">
+            We understand the unique challenges that SMEs face, which is why
+            we&apos;ve developed a suite of tools to help you manage your
+            business.
+          </p>
+        </div>
 
         {/* Cards */}
-        {[...Array(6)].map((_, i) => {
+        {(() => {
           const initialPositions = [
             { top: "260px", left: "-240px" },
             { top: "-280px", right: "-10px" },
@@ -431,130 +443,98 @@ export default function Intro() {
             { top: "300px", right: "-240px" },
           ];
 
-          const cardData = [
+          const features = [
             {
-              type: "tsh-balance",
-              bg: "linear-gradient(135deg, var(--color-primary) 0%, #1a1a24 100%)",
-            },
-            {
-              type: "tanzania-account",
-              bg: "linear-gradient(135deg, #2a2546 0%, #1a1530 100%)",
-            },
-            {
-              type: "mobile-money",
+              icon: FaBoxes,
+              title: "Stock inventory",
+              description:
+                "Keep track of your stock levels and see what's selling fast and slow with our real-time inventory management system.",
               bg: "linear-gradient(135deg, var(--wash-cream) 0%, #f0e0a8 100%)",
+              tone: "light",
             },
             {
-              type: "supplier-payment",
-              bg: "linear-gradient(135deg, var(--wash-lavender) 0%, #d8cef0 100%)",
+              icon: FaChartLine,
+              title: "Sales and Expenses",
+              description:
+                "Our platform makes it easy to track your sales and expenses, so you can see exactly how your business is performing at any given time.",
+              bg: "linear-gradient(135deg, var(--color-primary) 0%, #1a1a24 100%)",
+              tone: "dark",
             },
             {
-              type: "madeni",
+              icon: FaHandHoldingUsd,
+              title: "Debt collection",
+              description:
+                "We've built powerful tools to help you collect outstanding debts from your customers, so you can keep your cash flow healthy and your business growing.",
               bg: "linear-gradient(135deg, var(--wash-peach) 0%, #f4c5a8 100%)",
+              tone: "light",
             },
             {
-              type: "wateja",
+              icon: FaUsers,
+              title: "Customer management",
+              description:
+                "Keep all your customer information in one place, so you can easily communicate with them and build long-lasting relationships.",
               bg: "linear-gradient(135deg, #3a2f1a 0%, #2a2010 100%)",
+              tone: "dark",
+            },
+            {
+              icon: FaGlobe,
+              title: "Cross-border payments",
+              description:
+                "Send and receive money in 30+ countries at fair rates. Hold TZS, pay suppliers in USD, CNY, or INR — all from one app.",
+              bg: "linear-gradient(135deg, var(--wash-lavender) 0%, #d8cef0 100%)",
+              tone: "light",
+            },
+            {
+              icon: FaCoins,
+              title: "Smart loans",
+              description:
+                "Your daily transactions build a credit profile that unlocks working-capital loans from our lending partners — fast, fair, and tailored to your business.",
+              bg: "linear-gradient(135deg, #2a2546 0%, #1a1530 100%)",
+              tone: "dark",
             },
           ];
 
-          const zIndex = i === 3 ? 100 : 90;
+          return features.map((feature, i) => {
+            const Icon = feature.icon;
+            const isDark = feature.tone === "dark";
+            const zIndex = i === 3 ? 100 : 90;
 
-          return (
-            <div
-              key={i}
-              ref={(el) => (cardsRef.current[i] = el)}
-              className={`intro-card absolute max-[900px]:w-42 max-[900px]:h-42 w-64 h-64 rounded-none overflow-hidden shadow-sm ${i === 1 ? "max-[768px]:hidden" : ""}`}
-              style={{
-                ...initialPositions[i],
-                zIndex: zIndex,
-                background: cardData[i].bg,
-              }}
-            >
-              {/* Card Content */}
-              {cardData[i].type === "tsh-balance" && (
-                <div className="relative w-full h-full p-5 flex flex-col justify-between text-white">
-                  <div className="flex items-center gap-2">
-                    <div className="w-9 h-9 rounded-full flex items-center justify-center" style={{ background: 'var(--color-accent)' }}>
-                      <span className="text-sm font-bold" style={{ color: 'var(--color-primary)' }}>T</span>
-                    </div>
-                    <span className="text-2xl font-semibold">TZS</span>
+            return (
+              <div
+                key={feature.title}
+                ref={(el) => (cardsRef.current[i] = el)}
+                className={`intro-card absolute max-[900px]:w-44 max-[900px]:h-44 w-64 h-64 rounded-2xl overflow-hidden shadow-sm ${i === 1 ? "max-[768px]:hidden" : ""}`}
+                style={{
+                  ...initialPositions[i],
+                  zIndex,
+                  background: feature.bg,
+                  color: isDark ? "#fff" : "var(--color-primary)",
+                }}
+              >
+                <div className="relative w-full h-full p-5 max-[900px]:p-4 flex flex-col justify-between">
+                  <div
+                    className="w-10 h-10 max-[900px]:w-8 max-[900px]:h-8 rounded-lg flex items-center justify-center"
+                    style={{
+                      background: isDark
+                        ? "rgba(255,255,255,0.12)"
+                        : "rgba(14,14,16,0.08)",
+                    }}
+                  >
+                    <Icon className="text-base max-[900px]:text-sm" />
                   </div>
                   <div>
-                    <div className="text-3xl font-bold mb-1">TSh 2,450,000</div>
-                    <p className="text-sm opacity-80">Balance</p>
+                    <h3 className="text-[1rem] max-[900px]:text-[0.85rem] font-semibold mb-1.5 leading-tight">
+                      {feature.title}
+                    </h3>
+                    <p className="text-[0.78rem] max-[900px]:text-[0.7rem] leading-snug opacity-80">
+                      {feature.description}
+                    </p>
                   </div>
                 </div>
-              )}
-
-              {cardData[i].type === "tanzania-account" && (
-                <div className="relative w-full h-full p-5 flex flex-col justify-between text-white">
-                  <div>
-                    <h3 className="text-base font-medium mb-8">Tanzania account</h3>
-                    <div className="space-y-1.5">
-                      <p className="text-xs opacity-80">
-                        Receive in TZS, pay anywhere
-                      </p>
-                      <p className="text-xs opacity-80">Balance: TSh 2,450,000</p>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {cardData[i].type === "mobile-money" && (
-                <div className="relative w-full h-full p-6 flex flex-col justify-between" style={{ color: 'var(--color-primary)' }}>
-                  <div className="flex items-center gap-2">
-                    <FaMobileAlt className="text-xl" />
-                    <span className="text-sm font-semibold">Mobile money</span>
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold mb-1">M-Pesa</div>
-                    <p className="text-sm opacity-80">Airtel Money · Tigo Pesa</p>
-                  </div>
-                </div>
-              )}
-
-              {cardData[i].type === "supplier-payment" && (
-                <div className="relative w-full h-full p-5 flex flex-col justify-between" style={{ color: 'var(--color-primary)' }}>
-                  <div className="flex items-center gap-2">
-                    <FaArrowsAltH className="text-xl" />
-                    <span className="text-sm font-semibold">Cross-border</span>
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold mb-1">$ 12,580</div>
-                    <p className="text-xs opacity-80">Supplier paid in USD / CNY / INR</p>
-                  </div>
-                </div>
-              )}
-
-              {cardData[i].type === "madeni" && (
-                <div className="relative w-full h-full p-6 flex flex-col justify-end" style={{ color: 'var(--color-primary)' }}>
-                  <div className="mb-4">
-                    <div className="text-3xl font-bold mb-1">TSh 425,000</div>
-                  </div>
-                  <div>
-                    <h3 className="text-base font-semibold mb-0.5">Madeni</h3>
-                    <p className="text-sm opacity-80">Outstanding debts</p>
-                  </div>
-                </div>
-              )}
-
-              {cardData[i].type === "wateja" && (
-                <div className="relative w-full h-full p-6 flex flex-col justify-between text-white">
-                  <div className="flex items-center gap-2 mb-4">
-                    <div className="w-9 h-9 rounded-full flex items-center justify-center" style={{ background: 'var(--color-accent)' }}>
-                      <FaUsers className="text-base" style={{ color: 'var(--color-primary)' }} />
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold mb-1">247 Wateja</h3>
-                    <p className="text-sm opacity-80">Active customers tracked</p>
-                  </div>
-                </div>
-              )}
-            </div>
-          );
-        })}
+              </div>
+            );
+          });
+        })()}
       </div>
     </section>
   );

@@ -28,42 +28,26 @@ export default function Hero() {
   const stripRef = useRef(null)
 
   useGSAP(() => {
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ delay: 0.2 })
+    const tl = gsap.timeline({ delay: 0.2 })
 
-      tl.from(titleRef.current, {
-        y: -60,
-        opacity: 0,
-        duration: 0.9,
-        ease: 'power3.out',
-      })
+    tl.from(titleRef.current, {
+      y: -60,
+      opacity: 0,
+      duration: 0.9,
+      ease: 'power3.out',
+    })
 
-      tl.from(
-        descRef.current,
-        { y: -30, opacity: 0, duration: 0.7, ease: 'power2.out' },
-        '-=0.5',
-      )
+    tl.from(
+      descRef.current,
+      { y: -30, opacity: 0, duration: 0.7, ease: 'power2.out' },
+      '-=0.5',
+    )
 
-      tl.from(
-        ctaRef.current,
-        { y: 30, opacity: 0, duration: 0.7, ease: 'back.out(1.5)' },
-        '-=0.3',
-      )
-
-      tl.from(
-        chipsRef.current?.children ?? [],
-        { y: 20, opacity: 0, duration: 0.5, stagger: 0.08, ease: 'power2.out' },
-        '-=0.4',
-      )
-
-      tl.from(
-        stripRef.current,
-        { y: 20, opacity: 0, duration: 0.6, ease: 'power2.out' },
-        '-=0.2',
-      )
-    }, heroRef)
-
-    return () => ctx.revert()
+    tl.from(
+      ctaRef.current,
+      { y: 30, opacity: 0, duration: 0.7, ease: 'back.out(1.5)' },
+      '-=0.3',
+    )
   }, { scope: heroRef })
 
   return (
@@ -79,13 +63,13 @@ export default function Hero() {
       <div className="absolute bottom-16 left-1/3 w-80 h-80 rounded-full blur-3xl max-[768px]:hidden"
            style={{ background: 'var(--wash-cream)', opacity: 0.7 }} />
 
-      <div className="relative z-10 mx-auto w-full max-w-6xl px-6">
+      <div className="relative z-10 w-full max-w-6xl pl-6 pr-6 sm:pl-10 lg:pl-16">
         <div ref={titleRef} className="max-w-4xl">
           <h1
-            className="text-[clamp(2.4rem,7vw,4.6rem)] font-semibold leading-[1.02] tracking-[-0.02em]"
+            className="text-[clamp(2rem,6vw,4.4rem)] font-semibold leading-[1.02] tracking-[-0.02em]"
             style={{ color: 'var(--color-primary)' }}
           >
-            Bookkeeping and payments,
+            <span className="whitespace-nowrap">Bookkeeping and payments,</span>
             <br />
             built for African SMEs.
           </h1>
