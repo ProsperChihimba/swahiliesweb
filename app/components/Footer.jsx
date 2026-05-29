@@ -2,174 +2,210 @@
 
 import { useRef } from "react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { FaChevronDown, FaArrowRight } from "react-icons/fa";
-import { FaApple, FaGooglePlay } from "react-icons/fa";
-import { MdOutlineLogout } from "react-icons/md";
+import Image from "next/image";
 import { FaLinkedinIn } from "react-icons/fa";
-import { FaInstagram } from "react-icons/fa6";
-import { FaXTwitter } from "react-icons/fa6";
-import { APP_STORE_URL, PLAY_STORE_URL } from "../lib/storeLinks";
+import { FaInstagram, FaXTwitter } from "react-icons/fa6";
+import logo from "../../public/assets/images/logo.png";
 import { LINKEDIN_URL, INSTAGRAM_URL, X_URL } from "../lib/socialLinks";
 
+const linkColumns = [
+  {
+    title: "Payments",
+    links: [
+      { label: "Mobile money", href: "/#payments" },
+      { label: "Cards", href: "/#payments" },
+      { label: "Bank transfers", href: "/#payments" },
+      { label: "Payment links", href: "/#payments" },
+      { label: "Pricing", href: "/contact" },
+    ],
+  },
+  {
+    title: "Developers",
+    links: [
+      { label: "API reference", href: "/#developers" },
+      { label: "Documentation", href: "/contact" },
+    ],
+  },
+  {
+    title: "Kuza Business",
+    links: [
+      { label: "Overview", href: "/business" },
+      { label: "Download app", href: "/business" },
+    ],
+  },
+  {
+    title: "Company",
+    links: [
+      { label: "About", href: "/contact" },
+      { label: "Contact", href: "/contact" },
+      { label: "Press", href: "/contact" },
+      { label: "Careers", href: "/contact" },
+    ],
+  },
+];
+
+const socials = [
+  { label: "LinkedIn", href: LINKEDIN_URL, Icon: FaLinkedinIn },
+  { label: "X", href: X_URL, Icon: FaXTwitter },
+  { label: "Instagram", href: INSTAGRAM_URL, Icon: FaInstagram },
+];
 
 export default function Footer() {
   const footerRef = useRef(null);
 
-  useGSAP(() => {
-    const ctx = gsap.context(() => {
-      gsap.from(footerRef.current, {
-        scrollTrigger: {
-          trigger: footerRef.current,
-          start: "top 85%",
-        },
-        y: 40,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power3.out",
-      });
-    }, footerRef);
+  useGSAP(
+    () => {
+      const ctx = gsap.context(() => {
+        gsap.from(".footer-fade", {
+          scrollTrigger: {
+            trigger: footerRef.current,
+            start: "top 90%",
+          },
+          y: 24,
+          opacity: 0,
+          duration: 0.7,
+          stagger: 0.08,
+          ease: "power2.out",
+        });
+      }, footerRef);
 
-    return () => ctx.revert();
-  }, { scope: footerRef });
+      return () => ctx.revert();
+    },
+    { scope: footerRef },
+  );
+
+  const year = new Date().getFullYear();
 
   return (
     <footer
-      data-nav-theme="light"
-      className="bg-[#3c56ab] text-white py-7 pb-10 max-[900px]:pt-0"
+      ref={footerRef}
+      className="relative pt-20 pb-10 max-[900px]:pt-14 max-[900px]:pb-8"
+      style={{ background: "var(--color-primary)", color: "#fff" }}
     >
-      <div className=" mx-auto lg:px-16 px-6">
-        {/* here should go the footer 1 */}
-        <div className="pt-6">
-          <div className="grid grid-cols-2 gap-16 max-[900px]:gap-7 text-white max-[900px]:grid-cols-1 max-w-2xl">
-            <div className="space-y-4 max-[900px]:space-y-0">
-              <div className="flex items-center gap-2 text-[#f6e2a3] font-semibold uppercase text-[0.95rem] tracking-wide">
-                <span className="w-2 h-2 rounded-full bg-[#f6e2a3]" />
-                Discover
-              </div>
-              <ul className="space-y-3 max-[900px]:text-[0.8rem] text-[1rem] max-[900px]:space-y-1">
-                <li><a href="/business" className="hover:underline">Business</a></li>
-                <li><a href="/cards" className="hover:underline">How it works</a></li>
-                <li><a href="/contact" className="hover:underline">Contact</a></li>
-              </ul>
-            </div>
+      {/* Decorative orb */}
+      <div
+        className="absolute top-0 right-0 w-[420px] h-[420px] rounded-full blur-3xl pointer-events-none max-[768px]:hidden"
+        style={{ background: "var(--color-accent)", opacity: 0.18 }}
+        aria-hidden="true"
+      />
 
-            <div className="space-y-4 max-[900px]:space-y-0">
-              <div className="flex items-center gap-2 text-[#f6e2a3] font-semibold uppercase text-[0.95rem] tracking-wide">
-                <span className="w-2 h-2 rounded-full bg-[#f6e2a3]" />
-                Get in touch
-              </div>
-              <ul className="space-y-3 max-[900px]:text-[0.8rem] text-[1rem] max-[900px]:space-y-1">
-                <li><a href="mailto:contact@swahilies.com" className="hover:underline">contact@swahilies.com</a></li>
-                <li><a href="tel:+255682411725" className="hover:underline">+255 682 411 725</a></li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="mt-12 flex items-center justify-between gap-6">
-            <div className="flex gap-2 max-[900px]:mb-3">
-              <a
-                href={APP_STORE_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="relative border border-white/70 rounded-1 px-2 py-1 pl-6 bg-transparent text-white font-semibold text-[0.7rem] max-[900px]:text-[0.4rem] leading-[1.1] flex flex-col items-start hover:bg-white/10 transition-colors"
-              >
-                <span className="absolute left-[4px] top-1/2 -translate-y-1/2 lg:text-[1.15rem] md:text-[1.15rem] text-[0.8rem] opacity-95">
-                  <FaApple />
-                </span>
-                <span className="text-[0.5rem] font-medium opacity-80">
-                  Download on the
-                </span>
-                App Store
-              </a>
-              <a
-                href={PLAY_STORE_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="relative border border-white/70 rounded-1 px-2 py-1 pl-6 bg-transparent text-white font-semibold text-[0.7rem] max-[900px]:text-[0.4rem] leading-[1.1] flex flex-col items-start hover:bg-white/10 transition-colors"
-              >
-                <span className="absolute left-1 top-1/2 -translate-y-1/2 lg:text-[1.15rem] md:text-[1.15rem] text-[0.8rem] opacity-95">
-                  <FaGooglePlay />
-                </span>
-                <span className="text-[0.5rem] font-medium opacity-80">
-                  Get it on
-                </span>
-                Google Play
-              </a>
-            </div>
-            <div className="flex items-center gap-3 mb-3">
-              <a
-                href={LINKEDIN_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Swahilies on LinkedIn"
-                className="w-9 h-9 max-[900px]:w-5 max-[900px]:h-5 rounded-xs border border-white/70 flex items-center justify-center text-[1.1rem] max-[900px]:text-[0.7rem] hover:bg-white/10 transition-colors"
-              >
-                <FaLinkedinIn />
-              </a>
-              <a
-                href={X_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Swahilies on X"
-                className="w-9 h-9 max-[900px]:w-5 max-[900px]:h-5 rounded-xs border border-white/70 flex items-center justify-center text-[1.1rem] max-[900px]:text-[0.7rem] hover:bg-white/10 transition-colors"
-              >
-                <FaXTwitter />
-              </a>
-              <a
-                href={INSTAGRAM_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Swahilies on Instagram"
-                className="w-9 h-9 max-[900px]:w-5 max-[900px]:h-5 rounded-xs border border-white/70 flex items-center justify-center text-[1.1rem] max-[900px]:text-[0.7rem] hover:bg-white/10 transition-colors"
-              >
-                <FaInstagram />
-              </a>
-            </div>
-          </div>
-        </div>
-
-        {/* this is the second footer  */}
-        <div className="flex items-center justify-between gap-6 pt-6 relative border-t border-white/35 flex-wrap max-[900px]:flex-col max-[900px]:items-start">
-          <img
-            src="/assets/images/star1.svg"
-            alt=""
-            className="w-[18px] absolute right-24 -top-[9px] h-[18px]"
-          />
-
-          <div className="flex items-center gap-3">
-            <button className="inline-flex max-[900px]:text-[0.7rem] items-center gap-2 bg-white text-[#3c56ab] px-4 py-2 rounded-xs font-semibold text-[0.95rem]">
-              EN
-              <FaChevronDown className="text-[0.8rem] max-[900px]:text-[0.6rem]" />
-            </button>
-            <button
-              className="w-9 h-9 max-[900px]:w-7 max-[900px]:h-8 rounded-xs border-1 border-white text-white max-[900px]:text-[0.7rem] flex items-center justify-center"
-              aria-label="Next"
+      <div className="relative z-10 mx-auto max-w-7xl px-6">
+        {/* Top row — brand + columns */}
+        <div className="grid grid-cols-12 gap-10 max-[900px]:grid-cols-1 max-[900px]:gap-8">
+          {/* Brand block */}
+          <div className="col-span-4 max-[900px]:col-span-1 footer-fade">
+            <a
+              href="/"
+              className="inline-flex items-center justify-center mb-5 w-14 h-14 rounded-full bg-white/95 hover:bg-white transition-colors shadow-[0_4px_12px_rgba(0,0,0,0.2)]"
+              aria-label="Swahilies home"
             >
-              <MdOutlineLogout />
-            </button>
-            <button className="bg-[#f6e2a3] text-[#3c56ab] px-4 py-2 rounded-xs font-bold text-[0.95rem] max-[900px]:text-[0.7rem] uppercase">
-              Open account
-            </button>
+              <Image src={logo} alt="Swahilies" priority className="h-8 w-auto" />
+            </a>
+            <p className="text-white/70 text-[0.95rem] leading-relaxed max-w-sm">
+              Payments infrastructure for African businesses. One API, every
+              rail, pan-African settlement.
+            </p>
+
+            {/* Socials */}
+            <div className="mt-6 flex items-center gap-2">
+              {socials.map(({ label, href, Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Swahilies on ${label}`}
+                  className="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-[0.95rem] text-white/80 hover:bg-white/10 hover:text-white hover:border-white/30 transition-colors"
+                >
+                  <Icon />
+                </a>
+              ))}
+            </div>
           </div>
 
-          <div className="flex flex-col items-end gap-1 max-[900px]:items-start">
-            <span className="text-[0.85rem] text-white/70 leading-snug max-w-xs text-right max-[900px]:text-left">
-              Building the operating and financial system for Africa's 100M SMEs.
-            </span>
-            <span className="font-semibold text-[0.95rem]">
-              © Swahilies Inc. 2026
-            </span>
+          {/* Link columns */}
+          <div className="col-span-8 grid grid-cols-4 gap-8 max-[900px]:col-span-1 max-[600px]:grid-cols-2">
+            {linkColumns.map((col) => (
+              <div key={col.title} className="footer-fade">
+                <h4 className="text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-white/50 mb-4">
+                  {col.title}
+                </h4>
+                <ul className="space-y-2.5">
+                  {col.links.map((link) => (
+                    <li key={link.label}>
+                      <a
+                        href={link.href}
+                        className="text-[0.92rem] text-white/80 hover:text-white transition-colors"
+                      >
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </div>
 
-        <div className="mt-5 text-white/80 text-[0.9rem] leading-relaxed space-y-4 max-[900px]:text-[0.85rem]">
-          <p>
-            Not all products and services are available in all geographic areas
-            and remain subject to applicable laws, regulatory requirements, and
-            internal compliance policies.
-          </p>
+        {/* Contact strip */}
+        <div className="mt-14 max-[900px]:mt-10 footer-fade">
+          <div
+            className="flex items-center justify-between gap-6 py-5 max-[768px]:flex-col max-[768px]:items-start max-[768px]:gap-4 border-y"
+            style={{ borderColor: "rgba(255,255,255,0.08)" }}
+          >
+            <div className="flex flex-wrap items-center gap-x-8 gap-y-2 text-[0.92rem]">
+              <a
+                href="mailto:contact@swahilies.com"
+                className="text-white/80 hover:text-white transition-colors"
+              >
+                contact@swahilies.com
+              </a>
+              <a
+                href="tel:+255682411725"
+                className="text-white/80 hover:text-white transition-colors"
+              >
+                +255 682 411 725
+              </a>
+            </div>
+            <a
+              href="/contact"
+              className="inline-flex items-center px-5 py-2.5 text-[0.78rem] font-semibold tracking-[0.14em] uppercase rounded-full hover:opacity-90 transition-opacity"
+              style={{
+                background: "var(--color-accent)",
+                color: "var(--color-primary)",
+              }}
+            >
+              Start integrating
+            </a>
+          </div>
+        </div>
+
+        {/* Bottom row */}
+        <div className="mt-8 flex items-center justify-between gap-4 max-[768px]:flex-col max-[768px]:items-start footer-fade">
+          <div className="text-[0.82rem] text-white/55">
+            © {year} Swahilies Inc. All rights reserved.
+          </div>
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-[0.82rem]">
+            <a
+              href="/contact"
+              className="text-white/55 hover:text-white/85 transition-colors"
+            >
+              Privacy
+            </a>
+            <a
+              href="/contact"
+              className="text-white/55 hover:text-white/85 transition-colors"
+            >
+              Terms
+            </a>
+            <a
+              href="/contact"
+              className="text-white/55 hover:text-white/85 transition-colors"
+            >
+              Cookies
+            </a>
+          </div>
         </div>
       </div>
     </footer>

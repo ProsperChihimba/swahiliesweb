@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import { X } from "lucide-react";
+import { X, ChevronRight } from "lucide-react";
 import { HiOutlineBars2 } from "react-icons/hi2";
 import Image from "next/image";
 import logo from "../../public/assets/images/logo.png";
@@ -20,19 +20,43 @@ const languageOptions = [
 ];
 
 const navItems = [
-  { label: "Business", href: "/business" },
-  { label: "Cards", href: "/cards" },
-  { label: "Contact", href: "/contact" },
+  { label: "Home", href: "/" },
+  { label: "Payments", href: "/#payments" },
+  { label: "Developers", href: "/#developers" },
+  { label: "Kuza Business", href: "/business" },
+  { label: "Contact us", href: "/contact" },
 ];
 
 export default function NavBar() {
   const headerRef = useRef(null);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [language, setLanguage] = useState(languageOptions[0].value);
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 16);
+    let lastY = window.scrollY;
+    const SCROLL_THRESHOLD = 8; // ignore tiny scroll jitters
+    const HIDE_AFTER = 80; // only hide once user has scrolled this far down
+
+    const handleScroll = () => {
+      const currentY = window.scrollY;
+      const delta = currentY - lastY;
+
+      setIsScrolled(currentY > 16);
+
+      if (Math.abs(delta) > SCROLL_THRESHOLD) {
+        if (delta > 0 && currentY > HIDE_AFTER) {
+          // Scrolling down past threshold — hide
+          setIsHidden(true);
+        } else if (delta < 0) {
+          // Scrolling up — reveal
+          setIsHidden(false);
+        }
+        lastY = currentY;
+      }
+    };
+
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
@@ -81,9 +105,9 @@ export default function NavBar() {
       className="fixed top-3 left-0 right-0 z-50 px-3 sm:px-6 max-[768px]:top-2"
     >
       <nav
-        className={`mx-auto flex max-w-6xl items-center justify-between gap-3 rounded-full pl-5 pr-2 py-2 transition-all duration-300 max-[768px]:pl-3 ${
+        className={`mx-auto flex max-w-6xl items-center justify-between gap-3 rounded-full pl-3 pr-3 py-2.5 transition-all duration-300 max-[768px]:pl-2 ${
           isScrolled ? "shadow-[0_8px_30px_rgba(14,14,16,0.08)]" : "shadow-sm"
-        }`}
+        } ${isHidden && !isMobileMenuOpen ? "-translate-y-[140%]" : "translate-y-0"}`}
         style={{
           background: isScrolled
             ? "rgba(255, 255, 255, 0.92)"
@@ -96,19 +120,20 @@ export default function NavBar() {
         {/* Logo */}
         <a
           href="/"
-          className="flex items-center shrink-0 pl-1"
+          className="flex items-center justify-center shrink-0 w-13 h-13 rounded-full bg-white/95 hover:bg-white transition-colors shadow-[0_2px_8px_rgba(14,14,16,0.08)]"
+          style={{ width: "3.25rem", height: "3.25rem" }}
           aria-label="Swahilies home"
         >
-          <Image src={logo} alt="Swahilies" priority className="h-6 w-auto" />
+          <Image src={logo} alt="Swahilies" priority className="h-7 w-auto" />
         </a>
 
         {/* Desktop Navigation */}
         <ul className="hidden md:flex items-center gap-1">
           {navItems.map((item) => (
-            <li key={item.href}>
+            <li key={item.label}>
               <a
                 href={item.href}
-                className="px-4 py-2 text-[0.78rem] font-medium tracking-[0.16em] uppercase rounded-full transition-colors hover:bg-black/5"
+                className="px-4 py-2 text-[0.78rem] font-bold tracking-[0.02em] rounded-full transition-colors hover:bg-black/5"
                 style={{ color: "var(--color-primary)" }}
               >
                 {item.label}
@@ -130,10 +155,23 @@ export default function NavBar() {
           />
           <a
             href="/contact"
-            className="inline-flex items-center px-5 py-2.5 text-[0.78rem] font-semibold tracking-[0.14em] uppercase rounded-full text-white hover:opacity-90 transition-opacity"
+            className="group inline-flex items-center gap-2.5 pl-5 pr-1 py-1 rounded-full text-white hover:opacity-95 transition-opacity"
             style={{ background: "var(--color-primary)" }}
           >
-            Open account
+            <span className="text-[0.85rem] font-semibold tracking-tight">
+              Talk to us
+            </span>
+            <span
+              className="inline-flex items-center justify-center w-7 h-7 rounded-full transition-transform group-hover:translate-x-0.5"
+              style={{ background: "var(--color-accent)" }}
+              aria-hidden="true"
+            >
+              <ChevronRight
+                className="h-3.5 w-3.5"
+                strokeWidth={2.5}
+                style={{ color: "var(--color-primary)" }}
+              />
+            </span>
           </a>
         </div>
 
@@ -141,10 +179,23 @@ export default function NavBar() {
         <div className="flex md:hidden items-center gap-2">
           <a
             href="/contact"
-            className="px-3.5 py-2 text-[0.65rem] font-semibold tracking-[0.14em] uppercase rounded-full text-white"
+            className="group inline-flex items-center gap-2 pl-3.5 pr-1 py-1 rounded-full text-white"
             style={{ background: "var(--color-primary)" }}
           >
-            Open account
+            <span className="text-[0.7rem] font-semibold tracking-tight">
+              Talk to us
+            </span>
+            <span
+              className="inline-flex items-center justify-center w-6 h-6 rounded-full"
+              style={{ background: "var(--color-accent)" }}
+              aria-hidden="true"
+            >
+              <ChevronRight
+                className="h-3 w-3"
+                strokeWidth={2.5}
+                style={{ color: "var(--color-primary)" }}
+              />
+            </span>
           </a>
           <button
             type="button"
@@ -212,9 +263,9 @@ export default function NavBar() {
               <nav className="flex flex-col">
                 {navItems.map((item) => (
                   <a
-                    key={item.href}
+                    key={item.label}
                     href={item.href}
-                    className="py-3 text-[1.4rem] font-semibold tracking-tight border-b transition-colors hover:opacity-70"
+                    className="py-3 text-[1.4rem] font-bold tracking-tight border-b transition-colors hover:opacity-70"
                     style={{ borderColor: "var(--color-border)" }}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
@@ -226,11 +277,24 @@ export default function NavBar() {
 
             <a
               href="/contact"
-              className="mt-6 inline-flex items-center justify-center px-6 py-3 rounded-full text-white font-semibold text-sm tracking-[0.16em] uppercase hover:opacity-90 transition-opacity"
+              className="group mt-6 inline-flex items-center justify-between gap-3 pl-6 pr-1.5 py-1.5 rounded-full text-white hover:opacity-95 transition-opacity self-start"
               style={{ background: "var(--color-primary)" }}
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              Open account
+              <span className="text-[0.95rem] font-semibold tracking-tight">
+                Talk to us
+              </span>
+              <span
+                className="inline-flex items-center justify-center w-9 h-9 rounded-full transition-transform group-hover:translate-x-0.5"
+                style={{ background: "var(--color-accent)" }}
+                aria-hidden="true"
+              >
+                <ChevronRight
+                  className="h-4 w-4"
+                  strokeWidth={2.5}
+                  style={{ color: "var(--color-primary)" }}
+                />
+              </span>
             </a>
           </div>
         </div>
