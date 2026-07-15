@@ -2,13 +2,11 @@
 
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import { Menu, X } from "lucide-react";
+import { X, ChevronRight } from "lucide-react";
 import { HiOutlineBars2 } from "react-icons/hi2";
-import { MdOutlineLogout } from "react-icons/md";
 import Image from "next/image";
 import logo from "../../public/assets/images/logo.png";
 import { useGSAP } from "@gsap/react";
-
 import dynamic from "next/dynamic";
 
 const Select = dynamic(() => import("antd").then((mod) => mod.Select), {
@@ -21,139 +19,194 @@ const languageOptions = [
   { label: "ES", value: "es" },
 ];
 
+const navItems = [
+  { label: "Home", href: "/" },
+  { label: "Payments", href: "/#payments" },
+  { label: "Developers", href: "/#developers" },
+  { label: "Kuza Business", href: "/business" },
+  { label: "Contact us", href: "/contact" },
+];
+
 export default function NavBar() {
   const headerRef = useRef(null);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [language, setLanguage] = useState(languageOptions[0].value);
-  const [isLogoLight, setIsLogoLight] = useState(false);
 
   useEffect(() => {
-    const updateLogoTone = () => {
-      const headerHeight =
-        headerRef.current?.getBoundingClientRect().height ?? 0;
-      const probeY = Math.min(window.innerHeight - 1, headerHeight + 1);
-      const probeX = Math.min(window.innerWidth - 1, 40);
-      const el = document.elementFromPoint(probeX, probeY);
-      const section = el?.closest?.("[data-nav-theme]");
-      setIsLogoLight(section?.getAttribute("data-nav-theme") === "light");
-    };
+    let lastY = window.scrollY;
+    const SCROLL_THRESHOLD = 8; // ignore tiny scroll jitters
+    const HIDE_AFTER = 80; // only hide once user has scrolled this far down
 
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-      updateLogoTone();
+      const currentY = window.scrollY;
+      const delta = currentY - lastY;
+
+      setIsScrolled(currentY > 16);
+
+      if (Math.abs(delta) > SCROLL_THRESHOLD) {
+        if (delta > 0 && currentY > HIDE_AFTER) {
+          // Scrolling down past threshold — hide
+          setIsHidden(true);
+        } else if (delta < 0) {
+          // Scrolling up — reveal
+          setIsHidden(false);
+        }
+        lastY = currentY;
+      }
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", updateLogoTone);
-    updateLogoTone();
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", updateLogoTone);
-    };
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useGSAP(() => {
-    const headerEl = headerRef.current;
-    let tween;
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMobileMenuOpen]);
 
-    if (headerEl) {
-      // Keep header visible even if GSAP doesn't run
+  useGSAP(
+    () => {
+      const headerEl = headerRef.current;
+      if (!headerEl) return;
+
       gsap.set(headerEl, { opacity: 1 });
 
       const prefersReducedMotion = window.matchMedia(
         "(prefers-reduced-motion: reduce)",
       ).matches;
 
-      if (!prefersReducedMotion) {
-        tween = gsap.from(headerEl, {
-          y: -60,
-          duration: 0.8,
-          ease: "power3.out",
-          delay: 0.1,
-          clearProps: "transform",
-        });
-      }
-    }
+      if (prefersReducedMotion) return;
 
-    return () => {
-      if (tween) {
-        tween.kill();
-      }
-    };
-  }, { scope: headerRef });
+      const tween = gsap.from(headerEl, {
+        y: -30,
+        opacity: 0,
+        duration: 0.7,
+        ease: "power3.out",
+        delay: 0.15,
+      });
 
-  const navItems = ["BUSINESS", "CARDS", "CONTACT"];
+      return () => tween.kill();
+    },
+    { scope: headerRef },
+  );
 
   return (
     <header
       ref={headerRef}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 `}
+      className="fixed top-3 left-0 right-0 z-50 px-3 sm:px-6 max-[768px]:top-2"
     >
-      <nav className=" mx-auto px-6 max-[768px]:px-2 py-4 flex items-center justify-between">
+      <nav
+        className={`mx-auto flex max-w-6xl items-center justify-between gap-3 rounded-full pl-3 pr-3 py-2.5 transition-all duration-300 max-[768px]:pl-2 ${
+          isScrolled ? "shadow-[0_8px_30px_rgba(14,14,16,0.08)]" : "shadow-sm"
+        } ${isHidden && !isMobileMenuOpen ? "-translate-y-[140%]" : "translate-y-0"}`}
+        style={{
+          background: isScrolled
+            ? "rgba(255, 255, 255, 0.92)"
+            : "rgba(255, 255, 255, 0.7)",
+          backdropFilter: "blur(18px) saturate(180%)",
+          WebkitBackdropFilter: "blur(18px) saturate(180%)",
+          border: "1px solid var(--color-border)",
+        }}
+      >
         {/* Logo */}
-        <div
-          className={`text-lg font-semibold ${
-            isLogoLight ? "text-white" : "text-[#374992]"
-          } 
-  rounded-xs max-[768px]:px-3 px-7 py-1 tracking-tight
-  bg-white/5 backdrop-blur-md
- `}
+        <a
+          href="/"
+          className="flex items-center justify-center shrink-0 w-13 h-13 rounded-full bg-white/95 hover:bg-white transition-colors shadow-[0_2px_8px_rgba(14,14,16,0.08)]"
+          style={{ width: "3.25rem", height: "3.25rem" }}
+          aria-label="Swahilies home"
         >
-          <Image src={logo} alt="Swahilies" priority className="h-5 w-auto" />
-        </div>
+          <Image src={logo} alt="Swahilies" priority className="h-7 w-auto" />
+        </a>
 
         {/* Desktop Navigation */}
-        <div
-          className="hidden rounded-full px-7 py-3 tracking-tight 
-   md:flex items-center space-x-2 dg"
-        >
-          {navItems.map((item, index) => (
-            <a
-              key={item}
-              href={`/${item.toLowerCase()}`}
-              className="text-sm hover:text-gray-700 bg-white/10 rounded-xs px-4 py-1 backdrop-blur-md   text-[#ffffff] transition-colors duration-200 font-light "
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              {item}
-            </a>
+        <ul className="hidden md:flex items-center gap-1">
+          {navItems.map((item) => (
+            <li key={item.label}>
+              <a
+                href={item.href}
+                className="px-4 py-2 text-[0.78rem] font-bold tracking-[0.02em] rounded-full transition-colors hover:bg-black/5"
+                style={{ color: "var(--color-primary)" }}
+              >
+                {item.label}
+              </a>
+            </li>
           ))}
-        </div>
+        </ul>
 
-        {/* CTA Buttons */}
-        <div className="md:flex hidden items-center space-x-4">
+        {/* Desktop right side */}
+        <div className="hidden md:flex items-center gap-2">
           <Select
             value={language}
             onChange={setLanguage}
             aria-label="Language"
-            className="glass-select md:flex"
-            style={{ width: 70, background: "transparent", marginRight: 8 }}
+            variant="borderless"
+            className="glass-select"
+            style={{ width: 64, background: "transparent" }}
             options={languageOptions}
           />
-          <MdOutlineLogout className="text-black" size={20} />
-
-          <button className="px-6 navtext py-2 bg-[#474747] text-white rounded-xs  text-sm hover:bg-opacity-90 transition-all duration-200 hover:scale-105">
-            OPEN ACCOUNT
-          </button>
-          <div className="px-3 py-2 bg-[#474747] rounded-xs">
-            <HiOutlineBars2 className="text-white" />
-          </div>
+          <a
+            href="/contact"
+            className="group inline-flex items-center gap-2.5 pl-5 pr-1 py-1 rounded-full text-white hover:opacity-95 transition-opacity"
+            style={{ background: "var(--color-primary)" }}
+          >
+            <span className="text-[0.85rem] font-semibold tracking-tight">
+              Talk to us
+            </span>
+            <span
+              className="inline-flex items-center justify-center w-7 h-7 rounded-full transition-transform group-hover:translate-x-0.5"
+              style={{ background: "var(--color-accent)" }}
+              aria-hidden="true"
+            >
+              <ChevronRight
+                className="h-3.5 w-3.5"
+                strokeWidth={2.5}
+                style={{ color: "var(--color-primary)" }}
+              />
+            </span>
+          </a>
         </div>
 
-        <div className="flex items-center gap-2 lg:hidden md:hidden">
-          {/* Mobile Menu Button */}
-          {/* <MdOutlineLogout className="text-black" size={20} /> */}
-
-          <button className="px-4 navtext py-2 bg-[#38488B] text-white rounded-xs  text-xs hover:bg-opacity-90 transition-all duration-200 hover:scale-105">
-            OPEN ACCOUNT
-          </button>
-          <div
-            className="px-3 py-2 bg-[#47474784] rounded-xs"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        {/* Mobile right side */}
+        <div className="flex md:hidden items-center gap-2">
+          <a
+            href="/contact"
+            className="group inline-flex items-center gap-2 pl-3.5 pr-1 py-1 rounded-full text-white"
+            style={{ background: "var(--color-primary)" }}
           >
-            <HiOutlineBars2 className="text-white" />
-          </div>
+            <span className="text-[0.7rem] font-semibold tracking-tight">
+              Talk to us
+            </span>
+            <span
+              className="inline-flex items-center justify-center w-6 h-6 rounded-full"
+              style={{ background: "var(--color-accent)" }}
+              aria-hidden="true"
+            >
+              <ChevronRight
+                className="h-3 w-3"
+                strokeWidth={2.5}
+                style={{ color: "var(--color-primary)" }}
+              />
+            </span>
+          </a>
+          <button
+            type="button"
+            className="h-9 w-9 flex items-center justify-center rounded-full transition-colors"
+            style={{ background: "rgba(14, 14, 16, 0.06)" }}
+            onClick={() => setIsMobileMenuOpen(true)}
+            aria-label="Open menu"
+            aria-expanded={isMobileMenuOpen}
+          >
+            <HiOutlineBars2 style={{ color: "var(--color-primary)" }} />
+          </button>
         </div>
       </nav>
 
@@ -164,28 +217,35 @@ export default function NavBar() {
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"
         }`}
+        aria-hidden={!isMobileMenuOpen}
       >
         <div
-          className="absolute inset-0 bg-[#0b1020]/70 backdrop-blur-sm"
+          className="absolute inset-0"
+          style={{ background: "rgba(14, 14, 16, 0.6)", backdropFilter: "blur(6px)" }}
           onClick={() => setIsMobileMenuOpen(false)}
         />
         <div
-          className={`absolute inset-x-0 top-0 h-screen bg-white text-[#38488B] transform transition-transform duration-500 ${
-            isMobileMenuOpen ? "translate-y-0" : "-translate-y-full"
+          className={`absolute inset-x-3 top-3 rounded-3xl overflow-hidden transform transition-transform duration-500 ${
+            isMobileMenuOpen ? "translate-y-0" : "-translate-y-[110%]"
           }`}
+          style={{
+            background: "var(--color-bg)",
+            color: "var(--color-primary)",
+            border: "1px solid var(--color-border)",
+          }}
         >
-          <div className="px-6 pt-6 pb-10 h-full flex flex-col">
+          <div className="px-6 pt-6 pb-8 flex flex-col">
             <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <Image
-                  src={logo}
-                  alt="Swahilies"
-                  priority
-                  className="h-7 w-auto"
-                />
-              </div>
+              <Image
+                src={logo}
+                alt="Swahilies"
+                priority
+                className="h-6 w-auto"
+              />
               <button
-                className="w-10 h-10 rounded-full border border-[#d7dcf5] flex items-center justify-center"
+                type="button"
+                className="w-10 h-10 rounded-full flex items-center justify-center transition-colors hover:bg-black/5"
+                style={{ border: "1px solid var(--color-border)" }}
                 onClick={() => setIsMobileMenuOpen(false)}
                 aria-label="Close menu"
               >
@@ -193,29 +253,49 @@ export default function NavBar() {
               </button>
             </div>
 
-            <div className="mt-10 flex-1">
-              <div className="text-xs uppercase tracking-[0.3em] text-[#9aa3d8] mb-4">
+            <div className="mt-8">
+              <div
+                className="text-[0.65rem] uppercase tracking-[0.3em] mb-4"
+                style={{ color: "var(--color-muted)" }}
+              >
                 Menu
               </div>
-              <div className="flex flex-col gap-4">
+              <nav className="flex flex-col">
                 {navItems.map((item) => (
                   <a
-                    key={item}
-                    href={`${item.toLowerCase()}`}
-                    className="text-[1.3rem] max-[900px]:text-[1rem] font-semibold tracking-tight hover:text-[#2f3f8f] transition-colors"
+                    key={item.label}
+                    href={item.href}
+                    className="py-3 text-[1.4rem] font-bold tracking-tight border-b transition-colors hover:opacity-70"
+                    style={{ borderColor: "var(--color-border)" }}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    {item}
+                    {item.label}
                   </a>
                 ))}
-              </div>
+              </nav>
             </div>
 
-            <div className="pt-6 border-t border-[#e4e8ff]">
-              <button className="w-full px-6 py-3 bg-[#38488B] text-white rounded-xs font-semibold text-sm tracking-[0.2em] ">
-                Open account
-              </button>
-            </div>
+            <a
+              href="/contact"
+              className="group mt-6 inline-flex items-center justify-between gap-3 pl-6 pr-1.5 py-1.5 rounded-full text-white hover:opacity-95 transition-opacity self-start"
+              style={{ background: "var(--color-primary)" }}
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              <span className="text-[0.95rem] font-semibold tracking-tight">
+                Talk to us
+              </span>
+              <span
+                className="inline-flex items-center justify-center w-9 h-9 rounded-full transition-transform group-hover:translate-x-0.5"
+                style={{ background: "var(--color-accent)" }}
+                aria-hidden="true"
+              >
+                <ChevronRight
+                  className="h-4 w-4"
+                  strokeWidth={2.5}
+                  style={{ color: "var(--color-primary)" }}
+                />
+              </span>
+            </a>
           </div>
         </div>
       </div>

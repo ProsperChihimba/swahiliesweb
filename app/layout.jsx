@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "./components/Navbar";
 import FAQ from "./components/Faqs";
 import Footer from "./components/Footer";
+import CookieBanner from "./components/CookieBanner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -55,6 +56,7 @@ export default function RootLayout({ children }) {
         {children}
         <FAQ />
         <Footer />
+        <CookieBanner />
       </body>
     </html>
   );
