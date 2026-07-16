@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1c1c22"/>
+      <stop offset="100%" stop-color="#0e0e10"/>
+    </linearGradient>
+    <filter id="soft-shadow" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#000000" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <rect x="0" y="0" width="800" height="600" fill="url(#bg)"/>
+
+  <!-- Scattered SIM / mobile-money cards, back to front -->
+
+  <g transform="translate(120,110) rotate(-14)" filter="url(#soft-shadow)">
+    <rect x="-95" y="-60" width="190" height="120" rx="14" fill="#0072CE"/>
+    <circle cx="-60" cy="-25" r="14" fill="#ffffff" opacity="0.85"/>
+    <text x="-95" y="45" font-family="Arial, sans-serif" font-size="26" font-weight="700" fill="#ffffff">Tigo Pesa</text>
+  </g>
+
+  <g transform="translate(430,90) rotate(9)" filter="url(#soft-shadow)">
+    <rect x="-95" y="-60" width="190" height="120" rx="14" fill="#E4002B"/>
+    <circle cx="-60" cy="-25" r="14" fill="#ffffff" opacity="0.85"/>
+    <text x="-95" y="45" font-family="Arial, sans-serif" font-size="26" font-weight="700" fill="#ffffff">M-Pesa</text>
+  </g>
+
+  <g transform="translate(660,220) rotate(-8)" filter="url(#soft-shadow)">
+    <rect x="-95" y="-60" width="190" height="120" rx="14" fill="#ED1C24"/>
+    <circle cx="-60" cy="-25" r="14" fill="#ffffff" opacity="0.85"/>
+    <text x="-95" y="45" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#ffffff">Airtel Money</text>
+  </g>
+
+  <g transform="translate(230,320) rotate(11)" filter="url(#soft-shadow)">
+    <rect x="-95" y="-60" width="190" height="120" rx="14" fill="#00843D"/>
+    <circle cx="-60" cy="-25" r="14" fill="#ffffff" opacity="0.85"/>
+    <text x="-95" y="45" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#ffffff">TTCL</text>
+  </g>
+
+  <g transform="translate(540,380) rotate(-11)" filter="url(#soft-shadow)">
+    <rect x="-95" y="-60" width="190" height="120" rx="14" fill="#F0A020"/>
+    <circle cx="-60" cy="-25" r="14" fill="#0E0E10" opacity="0.75"/>
+    <text x="-95" y="45" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#0E0E10">HaloPesa</text>
+  </g>
+
+  <g transform="translate(360,480) rotate(6)" filter="url(#soft-shadow)">
+    <rect x="-95" y="-60" width="190" height="120" rx="14" fill="#7C5CE0"/>
+    <circle cx="-60" cy="-25" r="14" fill="#ffffff" opacity="0.85"/>
+    <text x="-95" y="45" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#ffffff">Zantel</text>
+  </g>
+</svg>

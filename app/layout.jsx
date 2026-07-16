@@ -22,7 +22,7 @@ export const metadata = {
     template: "%s · Swahilies",
   },
   description:
-    "Swahilies is the operating and financial system for African SMEs. Manage sales, stock, and debts; receive and send cross-border payments; and access credit — all in one app.",
+    "Swahilies is the operating and financial system for African SMEs. Manage sales, stock, and debts; receive and send cross-border payments; and access credit, all in one app.",
   applicationName: "Swahilies",
   icons: {
     icon: "/icon.png",

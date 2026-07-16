@@ -22,6 +22,7 @@ type Feature = {
   tagline: string;
   details: string[];
   Icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
+  iconSrc?: string;
   wash: string;
 };
 
@@ -29,13 +30,14 @@ const features: Feature[] = [
   {
     number: "01",
     title: "Sales tracking",
-    tagline: "Every sale, every channel — captured automatically",
+    tagline: "Every sale, every channel, captured automatically",
     details: [
       "Sales recorded as customers pay",
       "Daily, weekly, monthly summaries",
       "Profit margins surfaced in real time",
     ],
     Icon: Receipt,
+    iconSrc: "/assets/icons/sales.png",
     wash: "var(--wash-cream)",
   },
   {
@@ -48,6 +50,7 @@ const features: Feature[] = [
       "Purchase suggestions from sales velocity",
     ],
     Icon: Boxes,
+    iconSrc: "/assets/icons/stock.png",
     wash: "var(--wash-lavender)",
   },
   {
@@ -60,6 +63,7 @@ const features: Feature[] = [
       "Customer balances and outstanding debts",
     ],
     Icon: TrendingUp,
+    iconSrc: "/assets/icons/insights.png",
     wash: "var(--wash-peach)",
   },
 ];
@@ -132,6 +136,8 @@ export default function KuzaBusiness() {
               pin: true,
               pinSpacing: true,
               scrub: 1,
+              anticipatePin: 1,
+              invalidateOnRefresh: true,
             },
           });
 
@@ -259,11 +265,11 @@ export default function KuzaBusiness() {
   return (
     <section
       ref={sectionRef}
-      className="py-24 min-h-screen max-[900px]:pt-10 max-[900px]:pb-0 max-[900px]:min-h-0"
+      className="pt-10 pb-24 min-h-screen max-[900px]:pt-10 max-[900px]:pb-0 max-[900px]:min-h-0"
       style={{ background: "var(--color-bg)" }}
     >
       <div className="container mx-auto px-6 max-w-7xl">
-        <div ref={titleRef} className="max-w-3xl mb-12 max-[900px]:mb-4">
+        <div ref={titleRef} className="max-w-3xl mb-8 max-[900px]:mb-4">
           <div
             className="inline-flex items-center gap-2 px-3 py-1 rounded-full border mb-5 text-[0.7rem] uppercase tracking-[0.18em] font-medium"
             style={{
@@ -282,7 +288,7 @@ export default function KuzaBusiness() {
             className="text-[clamp(2.2rem,4.6vw,3.8rem)] font-semibold leading-[1.05] tracking-[-0.02em] mb-5"
             style={{ color: "var(--color-primary)" }}
           >
-            Kuza Business — built on
+            Kuza Business, built on
             <br />
             top of our payments rails.
           </h2>
@@ -290,14 +296,14 @@ export default function KuzaBusiness() {
             className="text-base sm:text-lg leading-relaxed max-w-2xl"
             style={{ color: "var(--color-muted)" }}
           >
-            A simple business tool for managing sales, stock, and expenses —
+            A simple business tool for managing sales, stock, and expenses,
             for the SMEs growing on top of Swahilies.
           </p>
         </div>
 
         <div className="grid grid-cols-[1.05fr_1fr] gap-12 items-start max-[900px]:grid-cols-1 max-[900px]:gap-0">
           {/* Sticky illustration card */}
-          <div className="lg:flex lg:items-center lg:justify-center lg:min-h-[28rem] lg:sticky lg:top-24 max-[900px]:block max-[900px]:min-h-0">
+          <div className="lg:flex lg:items-center lg:justify-center lg:min-h-[26rem] lg:sticky lg:top-6 max-[900px]:block max-[900px]:min-h-0">
             <div
               ref={cardStackRef}
               className="relative w-[min(92%,500px)] max-[900px]:w-full"
@@ -366,7 +372,11 @@ export default function KuzaBusiness() {
                               color: "var(--color-primary)",
                             }}
                           >
-                            <Icon className="h-4 w-4" strokeWidth={2.2} />
+                            {f.iconSrc ? (
+                              <img src={f.iconSrc} alt="" className="h-5 w-5 object-contain" aria-hidden="true" />
+                            ) : (
+                              <Icon className="h-4 w-4" strokeWidth={2.2} />
+                            )}
                           </span>
                           <div className="flex-1 min-w-0">
                             <div className="text-sm font-semibold leading-tight">
@@ -426,7 +436,11 @@ export default function KuzaBusiness() {
                         color: "var(--color-primary)",
                       }}
                     >
-                      <Icon className="h-5 w-5" strokeWidth={2.2} />
+                      {feature.iconSrc ? (
+                        <img src={feature.iconSrc} alt="" className="h-6 w-6 object-contain" aria-hidden="true" />
+                      ) : (
+                        <Icon className="h-5 w-5" strokeWidth={2.2} />
+                      )}
                     </div>
                     <div className="flex-1 min-w-0">
                       <div
@@ -507,7 +521,11 @@ export default function KuzaBusiness() {
                           color: "var(--color-primary)",
                         }}
                       >
-                        <Icon className="h-6 w-6" strokeWidth={2.2} />
+                        {feature.iconSrc ? (
+                          <img src={feature.iconSrc} alt="" className="h-6 w-6 object-contain" aria-hidden="true" />
+                        ) : (
+                          <Icon className="h-6 w-6" strokeWidth={2.2} />
+                        )}
                       </div>
                       <div className="flex-1 min-w-0">
                         <div

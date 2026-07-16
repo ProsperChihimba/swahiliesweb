@@ -5,7 +5,6 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import Hero from "../components/Hero";
-import Payments from "../components/Payments";
 import Developers from "../components/Developers";
 import KuzaBusiness from "../components/KuzaBusiness";
 
@@ -27,7 +26,6 @@ export function HomeContent() {
   return (
     <div ref={mainRef}>
       <Hero />
-      <Payments />
       <Developers />
       <KuzaBusiness />
     </div>

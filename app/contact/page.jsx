@@ -8,7 +8,6 @@ import {
   Mail,
   Phone,
   MessageCircle,
-  MapPin,
   ArrowUpRight,
   ChevronRight,
   Check,
@@ -20,14 +19,16 @@ import { LINKEDIN_URL, INSTAGRAM_URL, X_URL } from "../lib/socialLinks";
 const channels = [
   {
     Icon: Mail,
+    iconSrc: "/assets/icons/mail.png",
     label: "Email",
-    value: "contact@swahilies.com",
-    href: "mailto:contact@swahilies.com",
+    value: "info@swahilies.com",
+    href: "mailto:info@swahilies.com",
     helper: "Replies within 24 hours",
     wash: "var(--wash-cream)",
   },
   {
     Icon: Phone,
+    iconSrc: "/assets/icons/telephone.png",
     label: "Phone",
     value: "+255 682 411 725",
     href: "tel:+255682411725",
@@ -36,6 +37,7 @@ const channels = [
   },
   {
     Icon: MessageCircle,
+    iconSrc: "/assets/icons/whatsapp.png",
     label: "WhatsApp",
     value: "Chat with our team",
     href: "https://wa.me/255682411725",
@@ -155,7 +157,7 @@ function ContactPage() {
             >
               Whether you&apos;re an SME ready to streamline operations, a
               partner exploring collaboration, or just curious about what
-              we&apos;re building — we&apos;d love to hear from you.
+              we&apos;re building, we&apos;d love to hear from you.
             </p>
           </div>
         </div>
@@ -165,7 +167,7 @@ function ContactPage() {
       <section className="contact-channels py-16 max-[900px]:py-12">
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid grid-cols-3 gap-3 max-[900px]:grid-cols-1 max-[900px]:gap-4">
-            {channels.map(({ Icon, label, value, href, helper, wash }) => (
+            {channels.map(({ Icon, iconSrc, label, value, href, helper, wash }) => (
               <a
                 key={label}
                 href={href}
@@ -186,7 +188,11 @@ function ContactPage() {
                       color: "var(--color-primary)",
                     }}
                   >
-                    <Icon className="h-5 w-5" strokeWidth={2} />
+                    {iconSrc ? (
+                      <img src={iconSrc} alt="" className="h-5 w-5 object-contain" aria-hidden="true" />
+                    ) : (
+                      <Icon className="h-5 w-5" strokeWidth={2} />
+                    )}
                   </div>
                   <ArrowUpRight
                     className="h-4 w-4 transition-transform duration-300 ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
@@ -268,7 +274,7 @@ function ContactPage() {
                         className="text-[0.9rem]"
                         style={{ color: "var(--color-muted)" }}
                       >
-                        Thanks for reaching out — we&apos;ll be in touch
+                        Thanks for reaching out. We&apos;ll be in touch
                         shortly.
                       </div>
                     </div>
@@ -333,7 +339,7 @@ function ContactPage() {
                       color: "var(--color-primary)",
                     }}
                   >
-                    <MapPin className="h-5 w-5" strokeWidth={2} />
+                    <img src="/assets/icons/location.png" alt="" className="h-5 w-5 object-contain" aria-hidden="true" />
                   </div>
                   <h3
                     className="text-[1.05rem] font-semibold"

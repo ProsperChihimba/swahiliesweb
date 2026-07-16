@@ -20,16 +20,19 @@ if (typeof window !== "undefined") {
 const useCases = [
   {
     Icon: Briefcase,
+    iconSrc: "/assets/icons/b2b.png",
     title: "B2B",
     description: "Invoicing, vendor payouts, and reconciliation for businesses.",
   },
   {
     Icon: Layers,
+    iconSrc: "/assets/icons/market.png",
     title: "Marketplaces",
     description: "Split payments and payouts to thousands of sellers.",
   },
   {
     Icon: Globe,
+    iconSrc: "/assets/icons/saas.png",
     title: "SaaS",
     description: "Recurring subscriptions in local currencies.",
   },
@@ -56,11 +59,12 @@ export default function Developers() {
         gsap.from(".dev-fade", {
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: "top 80%",
+            start: "top 75%",
+            end: "top 25%",
+            scrub: 1,
           },
           y: 24,
           opacity: 0,
-          duration: 0.7,
           stagger: 0.08,
           ease: "power2.out",
         });
@@ -75,7 +79,8 @@ export default function Developers() {
     <section
       ref={sectionRef}
       id="developers"
-      className="py-24 max-[900px]:py-16 relative overflow-hidden"
+      data-nav-tone="dark"
+      className="min-h-screen flex items-center py-24 max-[900px]:py-16 max-[900px]:min-h-0 relative overflow-hidden"
       style={{ background: "var(--color-primary)", color: "#fff" }}
     >
       <div
@@ -89,7 +94,7 @@ export default function Developers() {
         aria-hidden="true"
       />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-6">
+      <div className="relative z-10 w-full mx-auto max-w-7xl px-6">
         <div className="grid grid-cols-12 gap-12 max-[900px]:grid-cols-1 max-[900px]:gap-10 items-center">
           {/* Copy */}
           <div className="col-span-6 max-[900px]:col-span-1">
@@ -151,7 +156,7 @@ export default function Developers() {
                 Built for
               </div>
               <div className="flex flex-col gap-2">
-                {useCases.map(({ Icon, title, description }) => (
+                {useCases.map(({ Icon, iconSrc, title, description }) => (
                   <div
                     key={title}
                     className="flex items-center gap-3 rounded-xl px-3.5 py-3 transition-colors hover:bg-white/5"
@@ -160,7 +165,11 @@ export default function Developers() {
                     <span
                       className="inline-flex items-center justify-center w-9 h-9 rounded-lg shrink-0 bg-white/10"
                     >
-                      <Icon className="h-4 w-4" strokeWidth={2} />
+                      {iconSrc ? (
+                        <img src={iconSrc} alt="" className="h-5 w-5 object-contain" aria-hidden="true" />
+                      ) : (
+                        <Icon className="h-4 w-4" strokeWidth={2} />
+                      )}
                     </span>
                     <div className="flex-1 min-w-0">
                       <div className="text-sm font-semibold leading-tight">

@@ -78,8 +78,8 @@ export default function BuiltFor() {
             style={{ color: "var(--color-muted)" }}
           >
             Swahilies brings together everything African businesses need to run
-            and grow — payments, bookkeeping, business insights, and access to
-            credit — all in one place.
+            and grow: payments, bookkeeping, business insights, and access to
+            credit, all in one place.
           </p>
         </div>
 
@@ -112,7 +112,7 @@ export default function BuiltFor() {
               <p className="text-[0.95rem] leading-[1.55] text-white/85 max-w-md">
                 Every sale, expense, stock movement, and customer balance is
                 captured automatically. No more notebooks, scattered
-                spreadsheets, or missing records — stay organized and know
+                spreadsheets, or missing records. Stay organized and know
                 exactly how your business is performing.
               </p>
             </div>
@@ -142,7 +142,7 @@ export default function BuiltFor() {
               style={{ color: "var(--color-muted)" }}
             >
               Daily activity builds your financial profile so eligible
-              businesses can access working capital — no traditional collateral
+              businesses can access working capital, no traditional collateral
               required.
             </p>
           </div>
@@ -228,7 +228,7 @@ export default function BuiltFor() {
               style={{ color: "var(--color-muted)" }}
             >
               Mobile-money first. Manage stock, customer debts, expenses, and
-              cash flow in one place — built around the realities of kiosks,
+              cash flow in one place, built around the realities of kiosks,
               shops, and growing enterprises.
             </p>
           </div>

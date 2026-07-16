@@ -278,7 +278,7 @@ export default function Traction() {
                     className="text-[0.9rem] leading-[1.5] mt-auto"
                     style={{ color: "var(--color-muted)" }}
                   >
-                    Real money moving through Swahilies — customer payments,
+                    Real money moving through Swahilies: customer payments,
                     supplier bills, and cross-border transfers.
                   </p>
                 </div>
@@ -311,7 +311,7 @@ export default function Traction() {
                     style={{ color: "var(--color-muted)" }}
                   >
                     Recurring revenue from SaaS plans, FX margin, and
-                    transaction fees — sustainable operations, not a runway
+                    transaction fees. Sustainable operations, not a runway
                     burn.
                   </p>
                 </div>

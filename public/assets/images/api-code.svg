@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800">
+  <defs>
+    <linearGradient id="panelbg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1c1c22"/>
+      <stop offset="100%" stop-color="#0e0e10"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="0" y="0" width="800" height="800" fill="url(#panelbg)"/>
+
+  <!-- window chrome -->
+  <circle cx="60" cy="60" r="10" fill="#ED6A5E"/>
+  <circle cx="94" cy="60" r="10" fill="#F4BF4F"/>
+  <circle cx="128" cy="60" r="10" fill="#61C554"/>
+  <text x="400" y="66" text-anchor="middle" font-family="monospace" font-size="20" fill="#9a9aa5">charges.create.ts</text>
+  <line x1="0" y1="100" x2="800" y2="100" stroke="#2a2a32" stroke-width="2"/>
+
+  <!-- fake syntax-highlighted code lines -->
+  <g font-family="monospace" font-size="24">
+    <text x="60" y="160" fill="#6a9955">// Create a charge — any African rail</text>
+
+    <text x="60" y="210" fill="#c586c0">const</text>
+    <text x="150" y="210" fill="#9cdcfe">charge</text>
+    <text x="270" y="210" fill="#d4d4d4">= await swahilies.charges.create({</text>
+
+    <text x="100" y="255" fill="#9cdcfe">amount</text>
+    <text x="220" y="255" fill="#d4d4d4">:</text>
+    <text x="240" y="255" fill="#b5cea8">25000</text>
+    <text x="330" y="255" fill="#d4d4d4">,</text>
+
+    <text x="100" y="300" fill="#9cdcfe">currency</text>
+    <text x="250" y="300" fill="#d4d4d4">:</text>
+    <text x="270" y="300" fill="#ce9178">'TZS'</text>
+    <text x="360" y="300" fill="#d4d4d4">,</text>
+
+    <text x="100" y="345" fill="#9cdcfe">payment_method</text>
+    <text x="360" y="345" fill="#d4d4d4">:</text>
+    <text x="380" y="345" fill="#ce9178">'mpesa'</text>
+    <text x="500" y="345" fill="#d4d4d4">,</text>
+
+    <text x="100" y="390" fill="#9cdcfe">metadata</text>
+    <text x="270" y="390" fill="#d4d4d4">: { order_id: </text>
+    <text x="520" y="390" fill="#ce9178">'ord_8f3'</text>
+    <text x="640" y="390" fill="#d4d4d4">},</text>
+
+    <text x="60" y="435" fill="#d4d4d4">});</text>
+
+    <text x="60" y="510" fill="#6a9955">// → charge.status === 'succeeded'</text>
+  </g>
+
+  <rect x="0" y="700" width="800" height="100" fill="#141418"/>
+  <circle cx="60" cy="750" r="8" fill="#61C554"/>
+  <text x="84" y="757" font-family="monospace" font-size="20" fill="#9a9aa5">200 OK · sandbox ready</text>
+</svg>

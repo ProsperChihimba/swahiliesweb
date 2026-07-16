@@ -80,6 +80,7 @@ export default function Footer() {
   return (
     <footer
       ref={footerRef}
+      data-nav-tone="dark"
       className="relative pt-20 pb-10 max-[900px]:pt-14 max-[900px]:pb-8"
       style={{ background: "var(--color-primary)", color: "#fff" }}
     >

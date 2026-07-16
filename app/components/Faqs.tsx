@@ -11,7 +11,7 @@ type FAQItem = { q: string; a: string };
 const faqs: FAQItem[] = [
   {
     q: "Which payment methods can I accept?",
-    a: "Mobile money (M-Pesa, Tigo Pesa, Airtel Money, MTN MoMo), Visa and Mastercard, and direct bank transfers — all through one integration.",
+    a: "Mobile money (M-Pesa, Tigo Pesa, Airtel Money, MTN MoMo), Visa and Mastercard, and direct bank transfers, all through one integration.",
   },
   {
     q: "How fast can I go live?",
@@ -23,11 +23,11 @@ const faqs: FAQItem[] = [
   },
   {
     q: "Do you support cross-border payments?",
-    a: "Yes. Hold funds in your local currency and pay out in USD, CNY, INR, EUR, GBP, and more — at fair mid-market FX rates, with settlement in hours rather than days.",
+    a: "Yes. Hold funds in your local currency and pay out in USD, CNY, INR, EUR, GBP, and more, at fair mid-market FX rates, with settlement in hours rather than days.",
   },
   {
     q: "Which countries does Swahilies support?",
-    a: "We're rolling out across Africa, starting in East Africa and expanding to West and Southern markets. If you don't see your country yet, get in touch — we'll let you know when we launch.",
+    a: "We're rolling out across Africa, starting in East Africa and expanding to West and Southern markets. If you don't see your country yet, get in touch and we'll let you know when we launch.",
   },
   {
     q: "Is Swahilies secure and compliant?",

@@ -42,7 +42,7 @@ const methods: Method[] = [
     title: "Cross-border Payments",
     tagline: "Pay suppliers in 30+ countries at fair rates",
     details: [
-      "Send USD, CNY, INR, EUR — funded from TZS",
+      "Send USD, CNY, INR, EUR, funded from TZS",
       "Real mid-market FX, no hidden spread",
       "Settles in hours, not 1–3 days",
     ],

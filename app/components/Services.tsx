@@ -20,7 +20,7 @@ const services = [
     icon: FaBook,
     title: "Business management",
     description:
-      "SMEs manage sales, stock, and debts on Swahilies — improving record-keeping and reducing losses. Built around how African small businesses actually run.",
+      "SMEs manage sales, stock, and debts on Swahilies, improving record-keeping and reducing losses. Built around how African small businesses actually run.",
     label: "business management",
   },
   {
@@ -34,7 +34,7 @@ const services = [
     icon: FaHandHoldingUsd,
     title: "Credit & lending",
     description:
-      "Request loans directly from the app. Your daily transactions build a credit profile that makes you visible to our lending partners — capital-light, risk-free.",
+      "Request loans directly from the app. Your daily transactions build a credit profile that makes you visible to our lending partners: capital-light, risk-free.",
     label: "credit & lending",
   },
 ];

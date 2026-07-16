@@ -480,7 +480,7 @@ export default function Intro() {
               icon: FaGlobe,
               title: "Cross-border payments",
               description:
-                "Send and receive money in 30+ countries at fair rates. Hold TZS, pay suppliers in USD, CNY, or INR — all from one app.",
+                "Send and receive money in 30+ countries at fair rates. Hold TZS, pay suppliers in USD, CNY, or INR, all from one app.",
               bg: "linear-gradient(135deg, var(--wash-lavender) 0%, #d8cef0 100%)",
               tone: "light",
             },
@@ -488,7 +488,7 @@ export default function Intro() {
               icon: FaCoins,
               title: "Smart loans",
               description:
-                "Your daily transactions build a credit profile that unlocks working-capital loans from our lending partners — fast, fair, and tailored to your business.",
+                "Your daily transactions build a credit profile that unlocks working-capital loans from our lending partners: fast, fair, and tailored to your business.",
               bg: "linear-gradient(135deg, #2a2546 0%, #1a1530 100%)",
               tone: "dark",
             },

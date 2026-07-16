@@ -28,7 +28,7 @@ const testimonials: Testimonial[] = [
     initials: "AM",
     accent: "var(--color-accent)",
     quote:
-      "Before Swahilies I tracked sales in a notebook. Now I see exactly what I sold, who owes me, and what I need to restock — all from my phone. My margins jumped because I finally know where the money goes.",
+      "Before Swahilies I tracked sales in a notebook. Now I see exactly what I sold, who owes me, and what I need to restock, all from my phone. My margins jumped because I finally know where the money goes.",
     label: "asha mwangi",
   },
   {

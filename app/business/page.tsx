@@ -52,7 +52,7 @@ const features: Feature[] = [
     Icon: Receipt,
     title: "Sales tracking",
     description:
-      "Every sale captured automatically — by channel, customer, and product. Daily, weekly, monthly views.",
+      "Every sale captured automatically, by channel, customer, and product. Daily, weekly, monthly views.",
     wash: "rgba(240, 160, 32, 0.18)",
     cardTint: "rgba(250, 241, 208, 0.7)",
     span: "col-span-7",
@@ -159,7 +159,7 @@ const builtFor = [
   },
   {
     title: "Service businesses",
-    description: "Salons, pharmacies, food vendors — keep every figure visible.",
+    description: "Salons, pharmacies, food vendors: keep every figure visible.",
   },
 ];
 
@@ -444,7 +444,7 @@ export function BusinessContent() {
               className="text-base sm:text-lg leading-relaxed max-w-2xl"
               style={{ color: "var(--color-muted)" }}
             >
-              Sales, stock, customers, expenses — captured automatically as you
+              Sales, stock, customers, expenses, captured automatically as you
               go. Numbers that match reality.
             </p>
           </div>

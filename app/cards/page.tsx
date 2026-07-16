@@ -33,7 +33,7 @@ export default function CardsPage() {
             style={{ color: "var(--color-muted)" }}
           >
             Swahilies is a single tool for the three jobs every African SME
-            does every day — running the business, moving money in and out,
+            does every day: running the business, moving money in and out,
             and getting access to credit. Here's how each piece works.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
