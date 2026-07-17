@@ -1,6 +1,12 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+
+// useLayoutEffect warns during SSR; this falls back to useEffect there and
+// only takes the layout-effect (pre-paint) timing on the client, where it
+// actually matters for skipping the video before Safari ever paints it.
+const useIsomorphicLayoutEffect =
+  typeof window !== 'undefined' ? useLayoutEffect : useEffect
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import {
@@ -37,6 +43,7 @@ export default function Hero() {
   const visualRef = useRef(null)
   const videoRef = useRef(null)
   const mobileVisualRef = useRef(null)
+  const [videoSrc, setVideoSrc] = useState('/assets/graphics/No-BG.webm')
 
   // Respect reduced-motion for the looping video.
   useEffect(() => {
@@ -48,6 +55,21 @@ export default function Hero() {
     if (prefersReducedMotion) {
       video.pause()
     }
+  }, [])
+
+  // No-BG.webm relies on the WebM alpha-channel extension (transparent
+  // background baked in via the container's alpha_mode flag, not a plain
+  // alpha pixel format). Chrome and Firefox have supported that extension
+  // since ~2013; Safari's WebM support is newer and doesn't include it, so
+  // Safari plays the raw un-composited color track instead of transparency
+  // — showing the source footage that was meant to be masked out as solid,
+  // visible noise. bg-clean.mov is an HEVC-with-alpha export of the same
+  // clip, which Safari does support natively, so Safari gets that source
+  // instead of the WebM.
+  useIsomorphicLayoutEffect(() => {
+    const ua = navigator.userAgent
+    const isSafari = /^((?!chrome|android|crios|fxios|edgios).)*safari/i.test(ua)
+    if (isSafari) setVideoSrc('/assets/graphics/bg-clean.mov')
   }, [])
 
   useGSAP(
@@ -150,7 +172,8 @@ export default function Hero() {
 
       {/* Video — full-bleed layer spanning the full hero height, docked to
           the right edge of the viewport, independent of the copy column's
-          max-w-7xl container so it can actually fill the space. */}
+          max-w-7xl container so it can actually fill the space. Source
+          swaps to bg-clean.mov on Safari — see the videoSrc effect above. */}
       <div className="absolute inset-y-0 -right-4 lg:-right-6 xl:-right-8 z-0 w-[50%] max-[1300px]:hidden flex items-center justify-end">
         <div
           ref={visualRef}
@@ -160,7 +183,7 @@ export default function Hero() {
           <video
             ref={videoRef}
             className="h-full w-full max-w-none object-contain object-right select-none drop-shadow-[0_30px_70px_rgba(14,14,16,0.16)]"
-            src="/assets/graphics/No-BG.webm"
+            src={videoSrc}
             autoPlay
             loop
             muted
@@ -240,14 +263,17 @@ export default function Hero() {
             the copy there). Rather than a small centered clip, this docks
             to the right and bleeds off the true screen edge (canceling
             out the section's own px padding), echoing the desktop
-            treatment at mobile scale instead of just shrinking it down. */}
+            treatment at mobile scale instead of just shrinking it down.
+            Source swaps to bg-clean.mov on Safari/iOS — see the videoSrc
+            effect above; this is exactly the block that was showing
+            corrupted on iOS before. */}
         <div
           ref={mobileVisualRef}
           className="hidden max-[1300px]:flex justify-end mt-10 sm:mt-12 -mr-3 sm:-mr-4"
         >
           <video
             className="w-[98%] sm:w-[88%] max-w-xl h-auto select-none drop-shadow-[0_20px_50px_rgba(14,14,16,0.18)]"
-            src="/assets/graphics/No-BG.webm"
+            src={videoSrc}
             autoPlay
             loop
             muted
