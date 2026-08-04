@@ -12,19 +12,13 @@ import { LINKEDIN_URL, INSTAGRAM_URL, X_URL } from "../lib/socialLinks";
 const linkColumns = [
   {
     title: "Payments",
-    links: [
-      { label: "Mobile money", href: "/#payments" },
-      { label: "Cards", href: "/#payments" },
-      { label: "Bank transfers", href: "/#payments" },
-      { label: "Payment links", href: "/#payments" },
-      { label: "Pricing", href: "/contact" },
-    ],
+    links: [{ label: "Overview", href: "/#payments" }],
   },
   {
     title: "Developers",
     links: [
       { label: "API reference", href: "/#developers" },
-      { label: "Documentation", href: "/contact" },
+      // { label: "Documentation", href: "/contact" },
     ],
   },
   {
@@ -37,10 +31,10 @@ const linkColumns = [
   {
     title: "Company",
     links: [
-      { label: "About", href: "/contact" },
+      // { label: "About", href: "/contact" },
       { label: "Contact", href: "/contact" },
-      { label: "Press", href: "/contact" },
-      { label: "Careers", href: "/contact" },
+      // { label: "Press", href: "/contact" },
+      // { label: "Careers", href: "/contact" },
     ],
   },
 ];
@@ -188,6 +182,7 @@ export default function Footer() {
             © {year} Swahilies Inc. All rights reserved.
           </div>
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-[0.82rem]">
+            {/*
             <a
               href="/contact"
               className="text-white/55 hover:text-white/85 transition-colors"
@@ -206,6 +201,7 @@ export default function Footer() {
             >
               Cookies
             </a>
+            */}
           </div>
         </div>
       </div>
