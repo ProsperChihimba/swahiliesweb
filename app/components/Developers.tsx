@@ -122,7 +122,8 @@ export default function Developers() {
 
             <div className="dev-fade flex flex-wrap items-center gap-3 mb-10">
               <a
-                href="/contact"
+                href="https://swahilies.readme.io/reference/overview"
+                     target="_blank"
                 className="group inline-flex items-center gap-3 pl-6 pr-1.5 py-1.5 rounded-full hover:opacity-95 transition-opacity"
                 style={{ background: "var(--color-accent)", color: "var(--color-primary)" }}
               >
@@ -137,8 +138,9 @@ export default function Developers() {
                 </span>
               </a>
 
-              <a
-                href="/contact"
+              <a 
+                href="https://forms.fillout.com/t/bBUJuXv1Ptus"
+                target="_blank"
                 className="inline-flex items-center gap-2 px-5 py-2.5 text-[0.95rem] font-semibold rounded-full transition-colors hover:bg-white/10"
                 style={{
                   color: "#fff",

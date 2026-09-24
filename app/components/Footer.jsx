@@ -164,7 +164,7 @@ export default function Footer() {
               </a>
             </div>
             <a
-              href="/contact"
+              href="https://forms.fillout.com/t/bBUJuXv1Ptus"
               className="inline-flex items-center px-5 py-2.5 text-[0.78rem] font-semibold tracking-[0.14em] uppercase rounded-full hover:opacity-90 transition-opacity"
               style={{
                 background: "var(--color-accent)",
