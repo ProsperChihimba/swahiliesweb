@@ -139,7 +139,7 @@ export default function Developers() {
               </a>
 
               <a 
-                href="https://forms.fillout.com/t/bBUJuXv1Ptus"
+                href="https://swahilies-dashboard-merchant.vercel.app/signup"
                 target="_blank"
                 className="inline-flex items-center gap-2 px-5 py-2.5 text-[0.95rem] font-semibold rounded-full transition-colors hover:bg-white/10"
                 style={{
